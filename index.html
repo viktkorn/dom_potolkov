@@ -8,8 +8,8 @@
 	<!-- <style>body{opacity: 0;}</style> -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap&_v=20220804005624" rel="stylesheet">
-	<link rel="stylesheet" href="css/style.min.css?_v=20220804005624">
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap&_v=20220805040011" rel="stylesheet">
+	<link rel="stylesheet" href="css/style.min.css?_v=20220805040011">
 	<link rel="shortcut icon" href="favicon.ico">
 	<!-- <meta name="robots" content="noindex, nofollow"> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,7 +24,7 @@
 					<h2 class="header__logo-title">Встановлюємо натяжні стелі в Харкові та Дніпрі з 2011 року</h2>
 				</div>
 				<div class="header__link">
-					<a href="#"><img class="header__link-img" src="img/ico-video.png" alt="play"></a>
+					<a data-goto-header data-goto="#reviews" href="#"><img class="header__link-img" src="img/ico-video.png" alt="play"></a>
 					<p class="header__link-text"><a data-goto-header data-goto="#reviews" href="#">Дивіться відео-відгуки про нашу компанію</a></p>
 				</div>
 				<div class="header__social">
@@ -147,8 +147,8 @@
 											Довжина кімнати:
 										</div>
 										<div class="square__range">
-											<div class="square__range-text">2,3 м</div>
-											<input type="range" id="square-range" class="square__range-input" min="0" max="10" value="2.3" step="0.1" />
+											<input type="text" readonly id="length-value" class="square__range-text" value="2.3"><b>м</b>
+											<input type="range" id="length-range" class="square__range-input" min="0" max="10" value="2.3" step="0.1" />
 										</div>
 									</div>
 									<div class="square__line">
@@ -156,40 +156,92 @@
 											Ширина кімнати:
 										</div>
 										<div class="square__range">
-											<div class="square__range-text">4,1 м</div>
-											<input type="range" id="square-range" class="square__range-input" min="0" max="10" value="4.1" step="0.1" />
+											<input type="text" readonly id="width-value" class="square__range-text" value="4.1"><b>м</b>
+											<input type="range" id="width-range" class="square__range-input" min="0" max="10" value="4.1" step="0.1" />
 										</div>
 									</div>
 								</div>
 								<div class="result">
 									<div class="result__line">
-										<span class="result__line-title">
+										<p class="result__line-title">
 											Ekonom:
-										</span>
-										<span class="result__line-price">
-											~ 3029 грн
-										</span>
+										</p>
+										<p class="result__line-price">
+											~ <span id="ekonom-price">3029</span> грн
+										</p>
 									</div>
 									<div class="result__line">
-										<span class="result__line-title">
+										<p class="result__line-title">
 											Comfort:
-										</span>
-										<span class="result__line-price">
-											~ 4949 грн
-										</span>
+										</p>
+										<p class="result__line-price">
+											~ <span id="comfort-price">4949</span> грн
+										</p>
 									</div>
 									<div class="result__line">
-										<span class="result__line-title">
+										<p class="result__line-title">
 											Premium:
-										</span>
-										<span class="result__line-price">
-											~ 7909 грн
-										</span>
+										</p>
+										<p class="result__line-price">
+											~ <span id="premium-price">7909</span> грн
+										</p>
 									</div>
 								</div>
 							</div>
-							<div class="calculator__button">
-								<a href="" type="submit" class="button">Дізнатися точну вартість</a>
+							<div class="calculator__description">
+								<div class="calculator__description-column">
+									<h4 class="calculator__description-title">
+										Econom
+									</h4>
+									<p class="calculator__description-text">
+										Для технічних приміщень
+									</p>
+									<ul class="calculator__description-list">
+										<li class="calculator__description-list__item">Пластиковий профіль</li>
+										<li class="calculator__description-list__item">Полотно MSD Classic</li>
+										<li class="calculator__description-list__item">Без декоративної вставки</li>
+										<li class="calculator__description-list__item">Люстри/світильники</li>
+										<li class="calculator__description-list__item">Накладний карниз</li>
+									</ul>
+									<div class="calculator__description-button">
+										<a href="" type="submit" class="button">Дізнатися точну вартість</a>
+									</div>
+								</div>
+								<div class="calculator__description-column">
+									<h4 class="calculator__description-title">
+										Comfort
+									</h4>
+									<p class="calculator__description-text">
+										Для житлових приміщень (стандартна стеля)
+									</p>
+									<ul class="calculator__description-list">
+										<li class="calculator__description-list__item">Алюмінієвий профіль</li>
+										<li class="calculator__description-list__item">Полотно MSD Premium</li>
+										<li class="calculator__description-list__item">З декоративною вставкою</li>
+										<li class="calculator__description-list__item">Люстри/світильники</li>
+										<li class="calculator__description-list__item">Прихований карниз</li>
+									</ul>
+									<div class="calculator__description-button">
+										<a href="" type="submit" class="button">Дізнатися точну вартість</a>
+									</div>
+								</div>
+								<div class="calculator__description-column">
+									<h4 class="calculator__description-title">
+										Premium
+									</h4>
+									<p class="calculator__description-text">
+										Для житлових приміщень (дизайнерські рішення)
+									</p>
+									<ul class="calculator__description-list">
+										<li class="calculator__description-list__item">Тіньовий профіль</li>
+										<li class="calculator__description-list__item">Полотно MSD Premium/Teqtum/Lumfer/Descor/Pongs</li>
+										<li class="calculator__description-list__item">Світлові лінії/паруюча стеля/магнітні трекові світильники</li>
+										<li class="calculator__description-list__item">Прихований електро/-карниз</li>
+									</ul>
+									<div class="calculator__description-button">
+										<a href="" type="submit" class="button">Дізнатися точну вартість</a>
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -611,7 +663,7 @@
 		</div>
 	</div>
 </div> -->
-	<script src="js/app.min.js?_v=20220804005624"></script>
+	<script src="js/app.min.js?_v=20220805040011"></script>
 </body>
 
 </html>

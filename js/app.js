@@ -3940,6 +3940,33 @@
     };
     const da = new DynamicAdapt("max");
     da.init();
+    const lengthValue = document.querySelector("#length-value");
+    const widthValue = document.querySelector("#width-value");
+    const lengthRange = document.querySelector("#length-range");
+    const widthRange = document.querySelector("#width-range");
+    const inputs = document.querySelectorAll('input[type="range"]');
+    const basePrice = 321;
+    const ekonomPriceElement = document.querySelector("#ekonom-price");
+    const comfortPriceElement = document.querySelector("#comfort-price");
+    const premiumPriceElement = document.querySelector("#premium-price");
+    lengthRange.addEventListener("input", (function() {
+        lengthValue.value = lengthRange.value;
+    }));
+    widthRange.addEventListener("input", (function() {
+        widthValue.value = widthRange.value;
+    }));
+    function calculate() {
+        let ekonomPrice = basePrice * parseFloat(lengthValue.value) * parseFloat(widthValue.value);
+        let comfortPrice = 1.65 * basePrice * parseFloat(lengthValue.value) * parseFloat(widthValue.value);
+        let premiumPrice = 2.64 * basePrice * parseFloat(lengthValue.value) * parseFloat(widthValue.value);
+        ekonomPriceElement.innerText = parseInt(ekonomPrice);
+        comfortPriceElement.innerText = parseInt(comfortPrice);
+        premiumPriceElement.innerText = parseInt(premiumPrice);
+    }
+    calculate();
+    for (const input of inputs) input.addEventListener("input", (function() {
+        calculate();
+    }));
     document.addEventListener("DOMContentLoaded", (() => {
         const tabs = document.querySelector(".tabs__container");
         const tabsBtn = document.querySelectorAll(".tabs__btn");
