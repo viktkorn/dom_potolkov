@@ -3956,9 +3956,9 @@
         widthValue.value = widthRange.value;
     }));
     function calculate() {
-        let ekonomPrice = basePrice * parseFloat(lengthValue.value) * parseFloat(widthValue.value);
-        let comfortPrice = 1.65 * basePrice * parseFloat(lengthValue.value) * parseFloat(widthValue.value);
-        let premiumPrice = 2.64 * basePrice * parseFloat(lengthValue.value) * parseFloat(widthValue.value);
+        let ekonomPrice = basePrice * parseInt(lengthValue.value) * parseInt(widthValue.value);
+        let comfortPrice = 1.65 * basePrice * parseInt(lengthValue.value) * parseInt(widthValue.value);
+        let premiumPrice = 2.64 * basePrice * parseInt(lengthValue.value) * parseInt(widthValue.value);
         ekonomPriceElement.innerText = parseInt(ekonomPrice);
         comfortPriceElement.innerText = parseInt(comfortPrice);
         premiumPriceElement.innerText = parseInt(premiumPrice);
