@@ -8,8 +8,8 @@
 	<!-- <style>body{opacity: 0;}</style> -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap&_v=20220808213230" rel="stylesheet">
-	<link rel="stylesheet" href="css/style.min.css?_v=20220808213230">
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap&_v=20220813215808" rel="stylesheet">
+	<link rel="stylesheet" href="css/style.min.css?_v=20220813215808">
 	<link rel="shortcut icon" href="favicon.ico">
 	<!-- <meta name="robots" content="noindex, nofollow"> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -72,7 +72,7 @@
 							<div class="ceiling__text text">
 								<h3>Отримайте повну <b>консультацію</b> та точну <b>вартість</b> натяжних стель від <b>головного технолога за&nbsp;40&nbsp;хвилин</b> не виходячи з дому</h3>
 							</div>
-							<a href="" type="submit" class="button ceiling__button">Отримати консультацію</a>
+							<a href="" type="submit" class="ceiling__button button-main">Отримати консультацію</a>
 							<div class="ceiling__benefits">
 								<div class="benefits-column">
 									<div class="ceiling__benefits__item">
@@ -345,10 +345,10 @@
 					<p class="callback__text">
 						Щоб отримати детальну консультацію, точний, детальний прорахунок стелі по кожній позиції, отримати розгорнуту допомогу по освітленню укажіть зручну для Вас дату:
 					</p>
-					<form action="" class="callback__form">
-						<input type="date" class="callback__form-date">
-						<input type="tel" class="callback__form-phone" placeholder="Введіть номер телефону">
-						<button type="submit" class="callback__form-button">Отримати консультацію</button>
+					<form data-ajax method="POST" class="callback__form" action="sendmail.php">
+						<input data-validate data-required="date" name="form[]" data-datepicker type="text" class="callback__form-date" placeholder="дд. мм. гггг">
+						<input data-validate data-required="phone" name="form[]" type="tel" class="callback__form-phone" placeholder="Введіть номер телефону">
+						<button type="submit" class="button-main callback__form-button">Отримати консультацію</button>
 					</form>
 				</div>
 			</section>
@@ -736,7 +736,7 @@
 		</div>
 	</div>
 </div> -->
-	<script src="js/app.min.js?_v=20220808213230"></script>
+	<script src="js/app.min.js?_v=20220813215808"></script>
 </body>
 
 </html>
