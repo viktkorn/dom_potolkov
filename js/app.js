@@ -4985,12 +4985,6 @@
                 new core(".gallery-top", {
                     modules: [ Navigation, Thumb ],
                     slidesPerView: 1,
-                    observer: true,
-                    observeParents: true,
-                    spaceBetween: 20,
-                    autoHeight: true,
-                    speed: 800,
-                    loop: true,
                     navigation: {
                         prevEl: ".swiper-button-prev",
                         nextEl: ".swiper-button-next"
