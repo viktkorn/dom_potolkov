@@ -746,6 +746,315 @@
                 }
             }
         }
+        class Popup {
+            constructor(options) {
+                let config = {
+                    logging: true,
+                    init: true,
+                    attributeOpenButton: "data-popup",
+                    attributeCloseButton: "data-close",
+                    fixElementSelector: "[data-lp]",
+                    youtubeAttribute: "data-popup-youtube",
+                    youtubePlaceAttribute: "data-popup-youtube-place",
+                    setAutoplayYoutube: true,
+                    classes: {
+                        popup: "popup",
+                        popupContent: "popup__content",
+                        popupActive: "popup_show",
+                        bodyActive: "popup-show"
+                    },
+                    focusCatch: true,
+                    closeEsc: true,
+                    bodyLock: true,
+                    hashSettings: {
+                        location: true,
+                        goHash: true
+                    },
+                    on: {
+                        beforeOpen: function() {},
+                        afterOpen: function() {},
+                        beforeClose: function() {},
+                        afterClose: function() {}
+                    }
+                };
+                this.youTubeCode;
+                this.isOpen = false;
+                this.targetOpen = {
+                    selector: false,
+                    element: false
+                };
+                this.previousOpen = {
+                    selector: false,
+                    element: false
+                };
+                this.lastClosed = {
+                    selector: false,
+                    element: false
+                };
+                this._dataValue = false;
+                this.hash = false;
+                this._reopen = false;
+                this._selectorOpen = false;
+                this.lastFocusEl = false;
+                this._focusEl = [ "a[href]", 'input:not([disabled]):not([type="hidden"]):not([aria-hidden])', "button:not([disabled]):not([aria-hidden])", "select:not([disabled]):not([aria-hidden])", "textarea:not([disabled]):not([aria-hidden])", "area[href]", "iframe", "object", "embed", "[contenteditable]", '[tabindex]:not([tabindex^="-"])' ];
+                this.options = {
+                    ...config,
+                    ...options,
+                    classes: {
+                        ...config.classes,
+                        ...options?.classes
+                    },
+                    hashSettings: {
+                        ...config.hashSettings,
+                        ...options?.hashSettings
+                    },
+                    on: {
+                        ...config.on,
+                        ...options?.on
+                    }
+                };
+                this.bodyLock = false;
+                this.options.init ? this.initPopups() : null;
+            }
+            initPopups() {
+                this.popupLogging(`Проснулся`);
+                this.eventsPopup();
+            }
+            eventsPopup() {
+                document.addEventListener("click", function(e) {
+                    const buttonOpen = e.target.closest(`[${this.options.attributeOpenButton}]`);
+                    if (buttonOpen) {
+                        e.preventDefault();
+                        this._dataValue = buttonOpen.getAttribute(this.options.attributeOpenButton) ? buttonOpen.getAttribute(this.options.attributeOpenButton) : "error";
+                        this.youTubeCode = buttonOpen.getAttribute(this.options.youtubeAttribute) ? buttonOpen.getAttribute(this.options.youtubeAttribute) : null;
+                        if ("error" !== this._dataValue) {
+                            if (!this.isOpen) this.lastFocusEl = buttonOpen;
+                            this.targetOpen.selector = `${this._dataValue}`;
+                            this._selectorOpen = true;
+                            this.open();
+                            return;
+                        } else this.popupLogging(`Ой ой, не заполнен атрибут у ${buttonOpen.classList}`);
+                        return;
+                    }
+                    const buttonClose = e.target.closest(`[${this.options.attributeCloseButton}]`);
+                    if (buttonClose || !e.target.closest(`.${this.options.classes.popupContent}`) && this.isOpen) {
+                        e.preventDefault();
+                        this.close();
+                        return;
+                    }
+                }.bind(this));
+                document.addEventListener("keydown", function(e) {
+                    if (this.options.closeEsc && 27 == e.which && "Escape" === e.code && this.isOpen) {
+                        e.preventDefault();
+                        this.close();
+                        return;
+                    }
+                    if (this.options.focusCatch && 9 == e.which && this.isOpen) {
+                        this._focusCatch(e);
+                        return;
+                    }
+                }.bind(this));
+                if (this.options.hashSettings.goHash) {
+                    window.addEventListener("hashchange", function() {
+                        if (window.location.hash) this._openToHash(); else this.close(this.targetOpen.selector);
+                    }.bind(this));
+                    window.addEventListener("load", function() {
+                        if (window.location.hash) this._openToHash();
+                    }.bind(this));
+                }
+            }
+            open(selectorValue) {
+                if (bodyLockStatus) {
+                    this.bodyLock = document.documentElement.classList.contains("lock") && !this.isOpen ? true : false;
+                    if (selectorValue && "string" === typeof selectorValue && "" !== selectorValue.trim()) {
+                        this.targetOpen.selector = selectorValue;
+                        this._selectorOpen = true;
+                    }
+                    if (this.isOpen) {
+                        this._reopen = true;
+                        this.close();
+                    }
+                    if (!this._selectorOpen) this.targetOpen.selector = this.lastClosed.selector;
+                    if (!this._reopen) this.previousActiveElement = document.activeElement;
+                    this.targetOpen.element = document.querySelector(this.targetOpen.selector);
+                    if (this.targetOpen.element) {
+                        if (this.youTubeCode) {
+                            const codeVideo = this.youTubeCode;
+                            const urlVideo = `https://www.youtube.com/embed/${codeVideo}?rel=0&showinfo=0&autoplay=1`;
+                            const iframe = document.createElement("iframe");
+                            iframe.setAttribute("allowfullscreen", "");
+                            const autoplay = this.options.setAutoplayYoutube ? "autoplay;" : "";
+                            iframe.setAttribute("allow", `${autoplay}; encrypted-media`);
+                            iframe.setAttribute("src", urlVideo);
+                            if (!this.targetOpen.element.querySelector(`[${this.options.youtubePlaceAttribute}]`)) {
+                                this.targetOpen.element.querySelector(".popup__text").setAttribute(`${this.options.youtubePlaceAttribute}`, "");
+                            }
+                            this.targetOpen.element.querySelector(`[${this.options.youtubePlaceAttribute}]`).appendChild(iframe);
+                        }
+                        if (this.options.hashSettings.location) {
+                            this._getHash();
+                            this._setHash();
+                        }
+                        this.options.on.beforeOpen(this);
+                        document.dispatchEvent(new CustomEvent("beforePopupOpen", {
+                            detail: {
+                                popup: this
+                            }
+                        }));
+                        this.targetOpen.element.classList.add(this.options.classes.popupActive);
+                        document.documentElement.classList.add(this.options.classes.bodyActive);
+                        if (!this._reopen) !this.bodyLock ? bodyLock() : null; else this._reopen = false;
+                        this.targetOpen.element.setAttribute("aria-hidden", "false");
+                        this.previousOpen.selector = this.targetOpen.selector;
+                        this.previousOpen.element = this.targetOpen.element;
+                        this._selectorOpen = false;
+                        this.isOpen = true;
+                        setTimeout((() => {
+                            this._focusTrap();
+                        }), 50);
+                        this.options.on.afterOpen(this);
+                        document.dispatchEvent(new CustomEvent("afterPopupOpen", {
+                            detail: {
+                                popup: this
+                            }
+                        }));
+                        this.popupLogging(`Открыл попап`);
+                    } else this.popupLogging(`Ой ой, такого попапа нет.Проверьте корректность ввода. `);
+                }
+            }
+            close(selectorValue) {
+                if (selectorValue && "string" === typeof selectorValue && "" !== selectorValue.trim()) this.previousOpen.selector = selectorValue;
+                if (!this.isOpen || !bodyLockStatus) return;
+                this.options.on.beforeClose(this);
+                document.dispatchEvent(new CustomEvent("beforePopupClose", {
+                    detail: {
+                        popup: this
+                    }
+                }));
+                if (this.youTubeCode) if (this.targetOpen.element.querySelector(`[${this.options.youtubePlaceAttribute}]`)) this.targetOpen.element.querySelector(`[${this.options.youtubePlaceAttribute}]`).innerHTML = "";
+                this.previousOpen.element.classList.remove(this.options.classes.popupActive);
+                this.previousOpen.element.setAttribute("aria-hidden", "true");
+                if (!this._reopen) {
+                    document.documentElement.classList.remove(this.options.classes.bodyActive);
+                    !this.bodyLock ? bodyUnlock() : null;
+                    this.isOpen = false;
+                }
+                this._removeHash();
+                if (this._selectorOpen) {
+                    this.lastClosed.selector = this.previousOpen.selector;
+                    this.lastClosed.element = this.previousOpen.element;
+                }
+                this.options.on.afterClose(this);
+                document.dispatchEvent(new CustomEvent("afterPopupClose", {
+                    detail: {
+                        popup: this
+                    }
+                }));
+                setTimeout((() => {
+                    this._focusTrap();
+                }), 50);
+                this.popupLogging(`Закрыл попап`);
+            }
+            _getHash() {
+                if (this.options.hashSettings.location) this.hash = this.targetOpen.selector.includes("#") ? this.targetOpen.selector : this.targetOpen.selector.replace(".", "#");
+            }
+            _openToHash() {
+                let classInHash = document.querySelector(`.${window.location.hash.replace("#", "")}`) ? `.${window.location.hash.replace("#", "")}` : document.querySelector(`${window.location.hash}`) ? `${window.location.hash}` : null;
+                const buttons = document.querySelector(`[${this.options.attributeOpenButton} = "${classInHash}"]`) ? document.querySelector(`[${this.options.attributeOpenButton} = "${classInHash}"]`) : document.querySelector(`[${this.options.attributeOpenButton} = "${classInHash.replace(".", "#")}"]`);
+                if (buttons && classInHash) this.open(classInHash);
+            }
+            _setHash() {
+                history.pushState("", "", this.hash);
+            }
+            _removeHash() {
+                history.pushState("", "", window.location.href.split("#")[0]);
+            }
+            _focusCatch(e) {
+                const focusable = this.targetOpen.element.querySelectorAll(this._focusEl);
+                const focusArray = Array.prototype.slice.call(focusable);
+                const focusedIndex = focusArray.indexOf(document.activeElement);
+                if (e.shiftKey && 0 === focusedIndex) {
+                    focusArray[focusArray.length - 1].focus();
+                    e.preventDefault();
+                }
+                if (!e.shiftKey && focusedIndex === focusArray.length - 1) {
+                    focusArray[0].focus();
+                    e.preventDefault();
+                }
+            }
+            _focusTrap() {
+                const focusable = this.previousOpen.element.querySelectorAll(this._focusEl);
+                if (!this.isOpen && this.lastFocusEl) this.lastFocusEl.focus(); else focusable[0].focus();
+            }
+            popupLogging(message) {
+                this.options.logging ? FLS(`[Попапос]: ${message}`) : null;
+            }
+        }
+        flsModules.popup = new Popup({});
+        let dataPopup = [ {
+            title: "Натяжна стеля зі вставкою",
+            description: `В данному виді натяжної стелі використовуєтья <b>алюмінієвий</b> або <b>пластиковий</b> профіль, який утворює технологічний зазор між стіною та полотном. Декоративна вставка служить “заглушкою” цього зазору. <br><br>Декоративна вставка - ПВХ плинтус товщиною в 1 см, який встановлюється по периметру кімнати`,
+            img_src: [ "./img/popup/insert-popup-01.jpg", "./img/popup/insert-popup-02.jpg", "./img/popup/insert-popup-03.jpg", "./img/popup/insert-popup-04.jpg", "./img/popup/insert-popup-05.jpg" ],
+            img_alt: [ "image-description", "image-description", "image-description", "image-description", "image-description" ]
+        }, {
+            title: "Тіньова натяжна стеля",
+            description: `В данному виді натяжної стелі використовуєтья <b>алюмінієвий</b> або <b>пластиковий</b> профіль, який утворює технологічний зазор між стіною та полотном. Декоративна вставка служить “заглушкою” цього зазору. <br><br>Декоративна вставка - ПВХ плинтус товщиною в 1 см, який встановлюється по периметру кімнати`,
+            img_src: [ "./img/popup/shadow-popup-01.jpg", "./img/popup/shadow-popup-02.jpg", "./img/popup/shadow-popup-03.jpg", "./img/popup/shadow-popup-04.jpg", "./img/popup/shadow-popup-05.jpg" ],
+            img_alt: [ "image-description", "image-description", "image-description", "image-description", "image-description" ]
+        }, {
+            title: "Безщільова натяжна стеля",
+            description: `В данному виді натяжної стелі використовуєтья <b>алюмінієвий</b> або <b>пластиковий</b> профіль, який утворює технологічний зазор між стіною та полотном. Декоративна вставка служить “заглушкою” цього зазору. <br><br>Декоративна вставка - ПВХ плинтус товщиною в 1 см, який встановлюється по периметру кімнати`,
+            img_src: [ "./img/popup/gapless-popup-01.jpg", "./img/popup/gapless-popup-02.jpg", "./img/popup/gapless-popup-03.jpg", "./img/popup/gapless-popup-04.jpg", "./img/popup/gapless-popup-05.jpg" ],
+            img_alt: [ "image-description", "image-description", "image-description", "image-description", "image-description" ]
+        }, {
+            title: "Натяжна стеля з підсвіткою",
+            description: `В данному виді натяжної стелі використовуєтья <b>алюмінієвий</b> або <b>пластиковий</b> профіль, який утворює технологічний зазор між стіною та полотном. Декоративна вставка служить “заглушкою” цього зазору. <br><br>Декоративна вставка - ПВХ плинтус товщиною в 1 см, який встановлюється по периметру кімнати`,
+            img_src: [ "./img/popup/soaring-popup-01.jpg", "./img/popup/soaring-popup-02.jpg", "./img/popup/soaring-popup-03.jpg", "./img/popup/soaring-popup-04.jpg", "./img/popup/soaring-popup-05.jpg" ],
+            img_alt: [ "image-description", "image-description", "image-description", "image-description", "image-description" ]
+        }, {
+            title: "Світлові лінії на натяжній стелі",
+            description: `В данному виді натяжної стелі використовуєтья <b>алюмінієвий</b> або <b>пластиковий</b> профіль, який утворює технологічний зазор між стіною та полотном. Декоративна вставка служить “заглушкою” цього зазору. <br><br>Декоративна вставка - ПВХ плинтус товщиною в 1 см, який встановлюється по периметру кімнати`,
+            img_src: [ "./img/popup/light-lines-popup-01.jpg", "./img/popup/light-lines-popup-02.jpg", "./img/popup/light-lines-popup-03.jpg", "./img/popup/light-lines-popup-04.jpg", "./img/popup/light-lines-popup-05.jpg" ],
+            img_alt: [ "image-description", "image-description", "image-description", "image-description", "image-description" ]
+        }, {
+            title: "Трекові системи освітлення",
+            description: `В данному виді натяжної стелі використовуєтья <b>алюмінієвий</b> або <b>пластиковий</b> профіль, який утворює технологічний зазор між стіною та полотном. Декоративна вставка служить “заглушкою” цього зазору. <br><br>Декоративна вставка - ПВХ плинтус товщиною в 1 см, який встановлюється по периметру кімнати`,
+            img_src: [ "./img/popup/track-popup-01.jpg", "./img/popup/track-popup-02.jpg", "./img/popup/track-popup-03.jpg", "./img/popup/track-popup-04.jpg", "./img/popup/track-popup-05.jpg" ],
+            img_alt: [ "image-description", "image-description", "image-description", "image-description", "image-description" ]
+        }, {
+            title: "Точкові світильники",
+            description: `В данному виді натяжної стелі використовуєтья <b>алюмінієвий</b> або <b>пластиковий</b> профіль, який утворює технологічний зазор між стіною та полотном. Декоративна вставка служить “заглушкою” цього зазору. <br><br>Декоративна вставка - ПВХ плинтус товщиною в 1 см, який встановлюється по периметру кімнати`,
+            img_src: [ "./img/popup/point-light-popup-01.jpg", "./img/popup/point-light-popup-02.jpg", "./img/popup/point-light-popup-03.jpg", "./img/popup/point-light-popup-04.jpg", "./img/popup/point-light-popup-05.jpg" ],
+            img_alt: [ "image-description", "image-description", "image-description", "image-description", "image-description" ]
+        }, {
+            title: "Прихований карниз для штори",
+            description: `В данному виді натяжної стелі використовуєтья <b>алюмінієвий</b> або <b>пластиковий</b> профіль, який утворює технологічний зазор між стіною та полотном. Декоративна вставка служить “заглушкою” цього зазору. <br><br>Декоративна вставка - ПВХ плинтус товщиною в 1 см, який встановлюється по периметру кімнати`,
+            img_src: [ "./img/popup/hidden-cornice-popup-01.jpg", "./img/popup/hidden-cornice-popup-02.jpg", "./img/popup/hidden-cornice-popup-03.jpg", "./img/popup/hidden-cornice-popup-04.jpg", "./img/popup/hidden-cornice-popup-05.jpg" ],
+            img_alt: [ "image-description", "image-description", "image-description", "image-description", "image-description" ]
+        }, {
+            title: "Ніші в натяжній стелі",
+            description: `В данному виді натяжної стелі використовуєтья <b>алюмінієвий</b> або <b>пластиковий</b> профіль, який утворює технологічний зазор між стіною та полотном. Декоративна вставка служить “заглушкою” цього зазору. <br><br>Декоративна вставка - ПВХ плинтус товщиною в 1 см, який встановлюється по периметру кімнати`,
+            img_src: [ "./img/popup/niches-popup-01.jpg", "./img/popup/niches-popup-02.jpg", "./img/popup/niches-popup-03.jpg", "./img/popup/niches-popup-04.jpg", "./img/popup/niches-popup-05.jpg" ],
+            img_alt: [ "image-description", "image-description", "image-description", "image-description", "image-description" ]
+        } ];
+        let popupItem = document.querySelectorAll(".popup__item");
+        let popupTitle = document.querySelector(".popup-slider__title");
+        let popupText = document.querySelector(".popup-info__text");
+        let popupImgLarge = document.querySelectorAll(".popup-img-large");
+        let popupImgSmall = document.querySelectorAll(".popup-img-small");
+        function createPopup(index) {
+            let currentData = dataPopup[index];
+            popupTitle.innerText = currentData.title;
+            popupText.innerHTML = currentData.description;
+            for (let i = 0; i < currentData.img_src.length; i++) {
+                popupImgLarge[i].src = currentData.img_src[i];
+                popupImgSmall[i].src = currentData.img_src[i];
+            }
+            for (let i = 0; i < currentData.img_alt.length; i++) popupImgLarge[i].alt = currentData.img_alt[i];
+        }
+        popupItem.forEach(((item, index) => {
+            item.addEventListener("click", (() => createPopup(index)));
+        }));
         class MousePRLX {
             constructor(props, data = null) {
                 let defaultConfig = {
@@ -1078,12 +1387,47 @@
             prevPhone = e.target.value;
             if (e.target.value.length <= 5) e.target.value = "";
         }));
-        function ssr_window_esm_isObject(obj) {
+        const phoneInputPopup = document.querySelectorAll(".popup-callback__form-phone")[0];
+        console.log(phoneInputPopup);
+        [].forEach.call(document.querySelectorAll(".popup-callback__form-phone"), (function(input) {
+            let keyCode;
+            function mask(event) {
+                event.keyCode && (keyCode = event.keyCode);
+                let pos = this.selectionStart;
+                if (pos < 3) event.preventDefault();
+                let matrix = "+38 (___) ___-__-__", i = 0, def = matrix.replace(/\D/g, ""), val = this.value.replace(/\D/g, ""), newValue = matrix.replace(/[_\d]/g, (function(a) {
+                    return i < val.length ? val.charAt(i++) || def.charAt(i) : a;
+                }));
+                i = newValue.indexOf("_");
+                if (-1 != i) {
+                    i < 5 && (i = 3);
+                    newValue = newValue.slice(0, i);
+                }
+                let reg = matrix.substr(0, this.value.length).replace(/_+/g, (function(a) {
+                    return "\\d{1," + a.length + "}";
+                })).replace(/[+()]/g, "\\$&");
+                reg = new RegExp("^" + reg + "$");
+                if (!reg.test(this.value) || this.value.length < 5 || keyCode > 47 && keyCode < 58) this.value = newValue;
+                if ("blur" == event.type && this.value.length < 5) this.value = "";
+            }
+            input.addEventListener("input", mask, false);
+            input.addEventListener("focus", mask, false);
+            input.addEventListener("blur", mask, false);
+            input.addEventListener("keydown", mask, false);
+        }));
+        phoneInputPopup.addEventListener("focus", (e => {
+            e.target.value = prevPhone;
+        }));
+        phoneInputPopup.addEventListener("blur", (e => {
+            prevPhone = e.target.value;
+            if (e.target.value.length <= 5) e.target.value = "";
+        }));
+        function isObject(obj) {
             return null !== obj && "object" === typeof obj && "constructor" in obj && obj.constructor === Object;
         }
         function extend(target = {}, src = {}) {
             Object.keys(src).forEach((key => {
-                if ("undefined" === typeof target[key]) target[key] = src[key]; else if (ssr_window_esm_isObject(src[key]) && ssr_window_esm_isObject(target[key]) && Object.keys(src[key]).length > 0) extend(target[key], src[key]);
+                if ("undefined" === typeof target[key]) target[key] = src[key]; else if (isObject(src[key]) && isObject(target[key]) && Object.keys(src[key]).length > 0) extend(target[key], src[key]);
             }));
         }
         const ssrDocument = {
@@ -4213,9 +4557,410 @@
                 destroy
             });
         }
+        function classes_to_selector_classesToSelector(classes) {
+            if (void 0 === classes) classes = "";
+            return `.${classes.trim().replace(/([\.:!\/])/g, "\\$1").replace(/ /g, ".")}`;
+        }
+        function Pagination(_ref) {
+            let {swiper, extendParams, on, emit} = _ref;
+            const pfx = "swiper-pagination";
+            extendParams({
+                pagination: {
+                    el: null,
+                    bulletElement: "span",
+                    clickable: false,
+                    hideOnClick: false,
+                    renderBullet: null,
+                    renderProgressbar: null,
+                    renderFraction: null,
+                    renderCustom: null,
+                    progressbarOpposite: false,
+                    type: "bullets",
+                    dynamicBullets: false,
+                    dynamicMainBullets: 1,
+                    formatFractionCurrent: number => number,
+                    formatFractionTotal: number => number,
+                    bulletClass: `${pfx}-bullet`,
+                    bulletActiveClass: `${pfx}-bullet-active`,
+                    modifierClass: `${pfx}-`,
+                    currentClass: `${pfx}-current`,
+                    totalClass: `${pfx}-total`,
+                    hiddenClass: `${pfx}-hidden`,
+                    progressbarFillClass: `${pfx}-progressbar-fill`,
+                    progressbarOppositeClass: `${pfx}-progressbar-opposite`,
+                    clickableClass: `${pfx}-clickable`,
+                    lockClass: `${pfx}-lock`,
+                    horizontalClass: `${pfx}-horizontal`,
+                    verticalClass: `${pfx}-vertical`,
+                    paginationDisabledClass: `${pfx}-disabled`
+                }
+            });
+            swiper.pagination = {
+                el: null,
+                $el: null,
+                bullets: []
+            };
+            let bulletSize;
+            let dynamicBulletIndex = 0;
+            function isPaginationDisabled() {
+                return !swiper.params.pagination.el || !swiper.pagination.el || !swiper.pagination.$el || 0 === swiper.pagination.$el.length;
+            }
+            function setSideBullets($bulletEl, position) {
+                const {bulletActiveClass} = swiper.params.pagination;
+                $bulletEl[position]().addClass(`${bulletActiveClass}-${position}`)[position]().addClass(`${bulletActiveClass}-${position}-${position}`);
+            }
+            function update() {
+                const rtl = swiper.rtl;
+                const params = swiper.params.pagination;
+                if (isPaginationDisabled()) return;
+                const slidesLength = swiper.virtual && swiper.params.virtual.enabled ? swiper.virtual.slides.length : swiper.slides.length;
+                const $el = swiper.pagination.$el;
+                let current;
+                const total = swiper.params.loop ? Math.ceil((slidesLength - 2 * swiper.loopedSlides) / swiper.params.slidesPerGroup) : swiper.snapGrid.length;
+                if (swiper.params.loop) {
+                    current = Math.ceil((swiper.activeIndex - swiper.loopedSlides) / swiper.params.slidesPerGroup);
+                    if (current > slidesLength - 1 - 2 * swiper.loopedSlides) current -= slidesLength - 2 * swiper.loopedSlides;
+                    if (current > total - 1) current -= total;
+                    if (current < 0 && "bullets" !== swiper.params.paginationType) current = total + current;
+                } else if ("undefined" !== typeof swiper.snapIndex) current = swiper.snapIndex; else current = swiper.activeIndex || 0;
+                if ("bullets" === params.type && swiper.pagination.bullets && swiper.pagination.bullets.length > 0) {
+                    const bullets = swiper.pagination.bullets;
+                    let firstIndex;
+                    let lastIndex;
+                    let midIndex;
+                    if (params.dynamicBullets) {
+                        bulletSize = bullets.eq(0)[swiper.isHorizontal() ? "outerWidth" : "outerHeight"](true);
+                        $el.css(swiper.isHorizontal() ? "width" : "height", `${bulletSize * (params.dynamicMainBullets + 4)}px`);
+                        if (params.dynamicMainBullets > 1 && void 0 !== swiper.previousIndex) {
+                            dynamicBulletIndex += current - (swiper.previousIndex - swiper.loopedSlides || 0);
+                            if (dynamicBulletIndex > params.dynamicMainBullets - 1) dynamicBulletIndex = params.dynamicMainBullets - 1; else if (dynamicBulletIndex < 0) dynamicBulletIndex = 0;
+                        }
+                        firstIndex = Math.max(current - dynamicBulletIndex, 0);
+                        lastIndex = firstIndex + (Math.min(bullets.length, params.dynamicMainBullets) - 1);
+                        midIndex = (lastIndex + firstIndex) / 2;
+                    }
+                    bullets.removeClass([ "", "-next", "-next-next", "-prev", "-prev-prev", "-main" ].map((suffix => `${params.bulletActiveClass}${suffix}`)).join(" "));
+                    if ($el.length > 1) bullets.each((bullet => {
+                        const $bullet = dom(bullet);
+                        const bulletIndex = $bullet.index();
+                        if (bulletIndex === current) $bullet.addClass(params.bulletActiveClass);
+                        if (params.dynamicBullets) {
+                            if (bulletIndex >= firstIndex && bulletIndex <= lastIndex) $bullet.addClass(`${params.bulletActiveClass}-main`);
+                            if (bulletIndex === firstIndex) setSideBullets($bullet, "prev");
+                            if (bulletIndex === lastIndex) setSideBullets($bullet, "next");
+                        }
+                    })); else {
+                        const $bullet = bullets.eq(current);
+                        const bulletIndex = $bullet.index();
+                        $bullet.addClass(params.bulletActiveClass);
+                        if (params.dynamicBullets) {
+                            const $firstDisplayedBullet = bullets.eq(firstIndex);
+                            const $lastDisplayedBullet = bullets.eq(lastIndex);
+                            for (let i = firstIndex; i <= lastIndex; i += 1) bullets.eq(i).addClass(`${params.bulletActiveClass}-main`);
+                            if (swiper.params.loop) if (bulletIndex >= bullets.length) {
+                                for (let i = params.dynamicMainBullets; i >= 0; i -= 1) bullets.eq(bullets.length - i).addClass(`${params.bulletActiveClass}-main`);
+                                bullets.eq(bullets.length - params.dynamicMainBullets - 1).addClass(`${params.bulletActiveClass}-prev`);
+                            } else {
+                                setSideBullets($firstDisplayedBullet, "prev");
+                                setSideBullets($lastDisplayedBullet, "next");
+                            } else {
+                                setSideBullets($firstDisplayedBullet, "prev");
+                                setSideBullets($lastDisplayedBullet, "next");
+                            }
+                        }
+                    }
+                    if (params.dynamicBullets) {
+                        const dynamicBulletsLength = Math.min(bullets.length, params.dynamicMainBullets + 4);
+                        const bulletsOffset = (bulletSize * dynamicBulletsLength - bulletSize) / 2 - midIndex * bulletSize;
+                        const offsetProp = rtl ? "right" : "left";
+                        bullets.css(swiper.isHorizontal() ? offsetProp : "top", `${bulletsOffset}px`);
+                    }
+                }
+                if ("fraction" === params.type) {
+                    $el.find(classes_to_selector_classesToSelector(params.currentClass)).text(params.formatFractionCurrent(current + 1));
+                    $el.find(classes_to_selector_classesToSelector(params.totalClass)).text(params.formatFractionTotal(total));
+                }
+                if ("progressbar" === params.type) {
+                    let progressbarDirection;
+                    if (params.progressbarOpposite) progressbarDirection = swiper.isHorizontal() ? "vertical" : "horizontal"; else progressbarDirection = swiper.isHorizontal() ? "horizontal" : "vertical";
+                    const scale = (current + 1) / total;
+                    let scaleX = 1;
+                    let scaleY = 1;
+                    if ("horizontal" === progressbarDirection) scaleX = scale; else scaleY = scale;
+                    $el.find(classes_to_selector_classesToSelector(params.progressbarFillClass)).transform(`translate3d(0,0,0) scaleX(${scaleX}) scaleY(${scaleY})`).transition(swiper.params.speed);
+                }
+                if ("custom" === params.type && params.renderCustom) {
+                    $el.html(params.renderCustom(swiper, current + 1, total));
+                    emit("paginationRender", $el[0]);
+                } else emit("paginationUpdate", $el[0]);
+                if (swiper.params.watchOverflow && swiper.enabled) $el[swiper.isLocked ? "addClass" : "removeClass"](params.lockClass);
+            }
+            function render() {
+                const params = swiper.params.pagination;
+                if (isPaginationDisabled()) return;
+                const slidesLength = swiper.virtual && swiper.params.virtual.enabled ? swiper.virtual.slides.length : swiper.slides.length;
+                const $el = swiper.pagination.$el;
+                let paginationHTML = "";
+                if ("bullets" === params.type) {
+                    let numberOfBullets = swiper.params.loop ? Math.ceil((slidesLength - 2 * swiper.loopedSlides) / swiper.params.slidesPerGroup) : swiper.snapGrid.length;
+                    if (swiper.params.freeMode && swiper.params.freeMode.enabled && !swiper.params.loop && numberOfBullets > slidesLength) numberOfBullets = slidesLength;
+                    for (let i = 0; i < numberOfBullets; i += 1) if (params.renderBullet) paginationHTML += params.renderBullet.call(swiper, i, params.bulletClass); else paginationHTML += `<${params.bulletElement} class="${params.bulletClass}"></${params.bulletElement}>`;
+                    $el.html(paginationHTML);
+                    swiper.pagination.bullets = $el.find(classes_to_selector_classesToSelector(params.bulletClass));
+                }
+                if ("fraction" === params.type) {
+                    if (params.renderFraction) paginationHTML = params.renderFraction.call(swiper, params.currentClass, params.totalClass); else paginationHTML = `<span class="${params.currentClass}"></span>` + " / " + `<span class="${params.totalClass}"></span>`;
+                    $el.html(paginationHTML);
+                }
+                if ("progressbar" === params.type) {
+                    if (params.renderProgressbar) paginationHTML = params.renderProgressbar.call(swiper, params.progressbarFillClass); else paginationHTML = `<span class="${params.progressbarFillClass}"></span>`;
+                    $el.html(paginationHTML);
+                }
+                if ("custom" !== params.type) emit("paginationRender", swiper.pagination.$el[0]);
+            }
+            function init() {
+                swiper.params.pagination = create_element_if_not_defined_createElementIfNotDefined(swiper, swiper.originalParams.pagination, swiper.params.pagination, {
+                    el: "swiper-pagination"
+                });
+                const params = swiper.params.pagination;
+                if (!params.el) return;
+                let $el = dom(params.el);
+                if (0 === $el.length) return;
+                if (swiper.params.uniqueNavElements && "string" === typeof params.el && $el.length > 1) {
+                    $el = swiper.$el.find(params.el);
+                    if ($el.length > 1) $el = $el.filter((el => {
+                        if (dom(el).parents(".swiper")[0] !== swiper.el) return false;
+                        return true;
+                    }));
+                }
+                if ("bullets" === params.type && params.clickable) $el.addClass(params.clickableClass);
+                $el.addClass(params.modifierClass + params.type);
+                $el.addClass(swiper.isHorizontal() ? params.horizontalClass : params.verticalClass);
+                if ("bullets" === params.type && params.dynamicBullets) {
+                    $el.addClass(`${params.modifierClass}${params.type}-dynamic`);
+                    dynamicBulletIndex = 0;
+                    if (params.dynamicMainBullets < 1) params.dynamicMainBullets = 1;
+                }
+                if ("progressbar" === params.type && params.progressbarOpposite) $el.addClass(params.progressbarOppositeClass);
+                if (params.clickable) $el.on("click", classes_to_selector_classesToSelector(params.bulletClass), (function onClick(e) {
+                    e.preventDefault();
+                    let index = dom(this).index() * swiper.params.slidesPerGroup;
+                    if (swiper.params.loop) index += swiper.loopedSlides;
+                    swiper.slideTo(index);
+                }));
+                Object.assign(swiper.pagination, {
+                    $el,
+                    el: $el[0]
+                });
+                if (!swiper.enabled) $el.addClass(params.lockClass);
+            }
+            function destroy() {
+                const params = swiper.params.pagination;
+                if (isPaginationDisabled()) return;
+                const $el = swiper.pagination.$el;
+                $el.removeClass(params.hiddenClass);
+                $el.removeClass(params.modifierClass + params.type);
+                $el.removeClass(swiper.isHorizontal() ? params.horizontalClass : params.verticalClass);
+                if (swiper.pagination.bullets && swiper.pagination.bullets.removeClass) swiper.pagination.bullets.removeClass(params.bulletActiveClass);
+                if (params.clickable) $el.off("click", classes_to_selector_classesToSelector(params.bulletClass));
+            }
+            on("init", (() => {
+                if (false === swiper.params.pagination.enabled) disable(); else {
+                    init();
+                    render();
+                    update();
+                }
+            }));
+            on("activeIndexChange", (() => {
+                if (swiper.params.loop) update(); else if ("undefined" === typeof swiper.snapIndex) update();
+            }));
+            on("snapIndexChange", (() => {
+                if (!swiper.params.loop) update();
+            }));
+            on("slidesLengthChange", (() => {
+                if (swiper.params.loop) {
+                    render();
+                    update();
+                }
+            }));
+            on("snapGridLengthChange", (() => {
+                if (!swiper.params.loop) {
+                    render();
+                    update();
+                }
+            }));
+            on("destroy", (() => {
+                destroy();
+            }));
+            on("enable disable", (() => {
+                const {$el} = swiper.pagination;
+                if ($el) $el[swiper.enabled ? "removeClass" : "addClass"](swiper.params.pagination.lockClass);
+            }));
+            on("lock unlock", (() => {
+                update();
+            }));
+            on("click", ((_s, e) => {
+                const targetEl = e.target;
+                const {$el} = swiper.pagination;
+                if (swiper.params.pagination.el && swiper.params.pagination.hideOnClick && $el && $el.length > 0 && !dom(targetEl).hasClass(swiper.params.pagination.bulletClass)) {
+                    if (swiper.navigation && (swiper.navigation.nextEl && targetEl === swiper.navigation.nextEl || swiper.navigation.prevEl && targetEl === swiper.navigation.prevEl)) return;
+                    const isHidden = $el.hasClass(swiper.params.pagination.hiddenClass);
+                    if (true === isHidden) emit("paginationShow"); else emit("paginationHide");
+                    $el.toggleClass(swiper.params.pagination.hiddenClass);
+                }
+            }));
+            const enable = () => {
+                swiper.$el.removeClass(swiper.params.pagination.paginationDisabledClass);
+                if (swiper.pagination.$el) swiper.pagination.$el.removeClass(swiper.params.pagination.paginationDisabledClass);
+                init();
+                render();
+                update();
+            };
+            const disable = () => {
+                swiper.$el.addClass(swiper.params.pagination.paginationDisabledClass);
+                if (swiper.pagination.$el) swiper.pagination.$el.addClass(swiper.params.pagination.paginationDisabledClass);
+                destroy();
+            };
+            Object.assign(swiper.pagination, {
+                enable,
+                disable,
+                render,
+                update,
+                init,
+                destroy
+            });
+        }
+        function Thumb(_ref) {
+            let {swiper, extendParams, on} = _ref;
+            extendParams({
+                thumbs: {
+                    swiper: null,
+                    multipleActiveThumbs: true,
+                    autoScrollOffset: 0,
+                    slideThumbActiveClass: "swiper-slide-thumb-active",
+                    thumbsContainerClass: "swiper-thumbs"
+                }
+            });
+            let initialized = false;
+            let swiperCreated = false;
+            swiper.thumbs = {
+                swiper: null
+            };
+            function onThumbClick() {
+                const thumbsSwiper = swiper.thumbs.swiper;
+                if (!thumbsSwiper || thumbsSwiper.destroyed) return;
+                const clickedIndex = thumbsSwiper.clickedIndex;
+                const clickedSlide = thumbsSwiper.clickedSlide;
+                if (clickedSlide && dom(clickedSlide).hasClass(swiper.params.thumbs.slideThumbActiveClass)) return;
+                if ("undefined" === typeof clickedIndex || null === clickedIndex) return;
+                let slideToIndex;
+                if (thumbsSwiper.params.loop) slideToIndex = parseInt(dom(thumbsSwiper.clickedSlide).attr("data-swiper-slide-index"), 10); else slideToIndex = clickedIndex;
+                if (swiper.params.loop) {
+                    let currentIndex = swiper.activeIndex;
+                    if (swiper.slides.eq(currentIndex).hasClass(swiper.params.slideDuplicateClass)) {
+                        swiper.loopFix();
+                        swiper._clientLeft = swiper.$wrapperEl[0].clientLeft;
+                        currentIndex = swiper.activeIndex;
+                    }
+                    const prevIndex = swiper.slides.eq(currentIndex).prevAll(`[data-swiper-slide-index="${slideToIndex}"]`).eq(0).index();
+                    const nextIndex = swiper.slides.eq(currentIndex).nextAll(`[data-swiper-slide-index="${slideToIndex}"]`).eq(0).index();
+                    if ("undefined" === typeof prevIndex) slideToIndex = nextIndex; else if ("undefined" === typeof nextIndex) slideToIndex = prevIndex; else if (nextIndex - currentIndex < currentIndex - prevIndex) slideToIndex = nextIndex; else slideToIndex = prevIndex;
+                }
+                swiper.slideTo(slideToIndex);
+            }
+            function init() {
+                const {thumbs: thumbsParams} = swiper.params;
+                if (initialized) return false;
+                initialized = true;
+                const SwiperClass = swiper.constructor;
+                if (thumbsParams.swiper instanceof SwiperClass) {
+                    swiper.thumbs.swiper = thumbsParams.swiper;
+                    Object.assign(swiper.thumbs.swiper.originalParams, {
+                        watchSlidesProgress: true,
+                        slideToClickedSlide: false
+                    });
+                    Object.assign(swiper.thumbs.swiper.params, {
+                        watchSlidesProgress: true,
+                        slideToClickedSlide: false
+                    });
+                } else if (utils_isObject(thumbsParams.swiper)) {
+                    const thumbsSwiperParams = Object.assign({}, thumbsParams.swiper);
+                    Object.assign(thumbsSwiperParams, {
+                        watchSlidesProgress: true,
+                        slideToClickedSlide: false
+                    });
+                    swiper.thumbs.swiper = new SwiperClass(thumbsSwiperParams);
+                    swiperCreated = true;
+                }
+                swiper.thumbs.swiper.$el.addClass(swiper.params.thumbs.thumbsContainerClass);
+                swiper.thumbs.swiper.on("tap", onThumbClick);
+                return true;
+            }
+            function update(initial) {
+                const thumbsSwiper = swiper.thumbs.swiper;
+                if (!thumbsSwiper || thumbsSwiper.destroyed) return;
+                const slidesPerView = "auto" === thumbsSwiper.params.slidesPerView ? thumbsSwiper.slidesPerViewDynamic() : thumbsSwiper.params.slidesPerView;
+                let thumbsToActivate = 1;
+                const thumbActiveClass = swiper.params.thumbs.slideThumbActiveClass;
+                if (swiper.params.slidesPerView > 1 && !swiper.params.centeredSlides) thumbsToActivate = swiper.params.slidesPerView;
+                if (!swiper.params.thumbs.multipleActiveThumbs) thumbsToActivate = 1;
+                thumbsToActivate = Math.floor(thumbsToActivate);
+                thumbsSwiper.slides.removeClass(thumbActiveClass);
+                if (thumbsSwiper.params.loop || thumbsSwiper.params.virtual && thumbsSwiper.params.virtual.enabled) for (let i = 0; i < thumbsToActivate; i += 1) thumbsSwiper.$wrapperEl.children(`[data-swiper-slide-index="${swiper.realIndex + i}"]`).addClass(thumbActiveClass); else for (let i = 0; i < thumbsToActivate; i += 1) thumbsSwiper.slides.eq(swiper.realIndex + i).addClass(thumbActiveClass);
+                const autoScrollOffset = swiper.params.thumbs.autoScrollOffset;
+                const useOffset = autoScrollOffset && !thumbsSwiper.params.loop;
+                if (swiper.realIndex !== thumbsSwiper.realIndex || useOffset) {
+                    let currentThumbsIndex = thumbsSwiper.activeIndex;
+                    let newThumbsIndex;
+                    let direction;
+                    if (thumbsSwiper.params.loop) {
+                        if (thumbsSwiper.slides.eq(currentThumbsIndex).hasClass(thumbsSwiper.params.slideDuplicateClass)) {
+                            thumbsSwiper.loopFix();
+                            thumbsSwiper._clientLeft = thumbsSwiper.$wrapperEl[0].clientLeft;
+                            currentThumbsIndex = thumbsSwiper.activeIndex;
+                        }
+                        const prevThumbsIndex = thumbsSwiper.slides.eq(currentThumbsIndex).prevAll(`[data-swiper-slide-index="${swiper.realIndex}"]`).eq(0).index();
+                        const nextThumbsIndex = thumbsSwiper.slides.eq(currentThumbsIndex).nextAll(`[data-swiper-slide-index="${swiper.realIndex}"]`).eq(0).index();
+                        if ("undefined" === typeof prevThumbsIndex) newThumbsIndex = nextThumbsIndex; else if ("undefined" === typeof nextThumbsIndex) newThumbsIndex = prevThumbsIndex; else if (nextThumbsIndex - currentThumbsIndex === currentThumbsIndex - prevThumbsIndex) newThumbsIndex = thumbsSwiper.params.slidesPerGroup > 1 ? nextThumbsIndex : currentThumbsIndex; else if (nextThumbsIndex - currentThumbsIndex < currentThumbsIndex - prevThumbsIndex) newThumbsIndex = nextThumbsIndex; else newThumbsIndex = prevThumbsIndex;
+                        direction = swiper.activeIndex > swiper.previousIndex ? "next" : "prev";
+                    } else {
+                        newThumbsIndex = swiper.realIndex;
+                        direction = newThumbsIndex > swiper.previousIndex ? "next" : "prev";
+                    }
+                    if (useOffset) newThumbsIndex += "next" === direction ? autoScrollOffset : -1 * autoScrollOffset;
+                    if (thumbsSwiper.visibleSlidesIndexes && thumbsSwiper.visibleSlidesIndexes.indexOf(newThumbsIndex) < 0) {
+                        if (thumbsSwiper.params.centeredSlides) if (newThumbsIndex > currentThumbsIndex) newThumbsIndex = newThumbsIndex - Math.floor(slidesPerView / 2) + 1; else newThumbsIndex = newThumbsIndex + Math.floor(slidesPerView / 2) - 1; else if (newThumbsIndex > currentThumbsIndex && 1 === thumbsSwiper.params.slidesPerGroup) ;
+                        thumbsSwiper.slideTo(newThumbsIndex, initial ? 0 : void 0);
+                    }
+                }
+            }
+            on("beforeInit", (() => {
+                const {thumbs} = swiper.params;
+                if (!thumbs || !thumbs.swiper) return;
+                init();
+                update(true);
+            }));
+            on("slideChange update resize observerUpdate", (() => {
+                update();
+            }));
+            on("setTransition", ((_s, duration) => {
+                const thumbsSwiper = swiper.thumbs.swiper;
+                if (!thumbsSwiper || thumbsSwiper.destroyed) return;
+                thumbsSwiper.setTransition(duration);
+            }));
+            on("beforeDestroy", (() => {
+                const thumbsSwiper = swiper.thumbs.swiper;
+                if (!thumbsSwiper || thumbsSwiper.destroyed) return;
+                if (swiperCreated) thumbsSwiper.destroy();
+            }));
+            Object.assign(swiper.thumbs, {
+                init,
+                update
+            });
+        }
         function initSliders() {
             if (document.querySelector(".swiper")) new core(".swiper", {
-                modules: [ Navigation ],
+                modules: [ Navigation, Pagination ],
                 observer: true,
                 observeParents: true,
                 slidesPerView: 1,
@@ -4223,16 +4968,38 @@
                 autoHeight: true,
                 speed: 800,
                 loop: true,
-                pagination: {
-                    el: ".swiper-pagination",
-                    clickable: true
-                },
                 navigation: {
                     prevEl: ".swiper-button-prev",
                     nextEl: ".swiper-button-next"
                 },
                 on: {}
             });
+            if (document.querySelector(".gallery-thumbs")) {
+                let swiper = new core(".gallery-thumbs", {
+                    modules: [ Navigation, Thumb ],
+                    slidesPerView: 5,
+                    freeMode: true,
+                    speed: 100,
+                    watchSlidesProgress: true
+                });
+                new core(".gallery-top", {
+                    modules: [ Navigation, Thumb ],
+                    slidesPerView: 1,
+                    observer: true,
+                    observeParents: true,
+                    spaceBetween: 20,
+                    autoHeight: true,
+                    speed: 800,
+                    loop: true,
+                    navigation: {
+                        prevEl: ".swiper-button-prev",
+                        nextEl: ".swiper-button-next"
+                    },
+                    thumbs: {
+                        swiper
+                    }
+                });
+            }
         }
         window.addEventListener("load", (function(e) {
             initSliders();
@@ -4481,7 +5248,7 @@
         const lengthRange = document.querySelector("#length-range");
         const widthRange = document.querySelector("#width-range");
         const inputs = document.querySelectorAll('input[type="range"]');
-        const basePrice = 321;
+        const basePrice = 350;
         const ekonomPriceElement = document.querySelector("#ekonom-price");
         const comfortPriceElement = document.querySelector("#comfort-price");
         const premiumPriceElement = document.querySelector("#premium-price");
@@ -4492,9 +5259,18 @@
             widthValue.value = widthRange.value;
         }));
         function calculate() {
-            let ekonomPrice = basePrice * parseInt(lengthValue.value) * parseInt(widthValue.value);
-            let comfortPrice = 1.65 * basePrice * parseInt(lengthValue.value) * parseInt(widthValue.value);
-            let premiumPrice = 2.64 * basePrice * parseInt(lengthValue.value) * parseInt(widthValue.value);
+            let ekonomPrice;
+            let comfortPrice;
+            let premiumPrice;
+            if (parseInt(lengthValue.value * parseInt(widthValue.value)) < 16) {
+                ekonomPrice = basePrice * parseInt(lengthValue.value) * parseInt(widthValue.value) + 90 * (2 * (parseInt(lengthValue.value) + parseInt(widthValue.value))) + 200;
+                comfortPrice = basePrice * parseInt(lengthValue.value) * parseInt(widthValue.value) + 170 * (2 * (parseInt(lengthValue.value) + parseInt(widthValue.value))) + 200;
+                premiumPrice = basePrice * parseInt(lengthValue.value) * parseInt(widthValue.value) + 375 * (2 * (parseInt(lengthValue.value) + parseInt(widthValue.value))) + 300;
+            } else {
+                ekonomPrice = (basePrice + 50) * parseInt(lengthValue.value) * parseInt(widthValue.value) + 90 * (2 * (parseInt(lengthValue.value) + parseInt(widthValue.value))) + 200;
+                comfortPrice = (basePrice + 50) * parseInt(lengthValue.value) * parseInt(widthValue.value) + 170 * (2 * (parseInt(lengthValue.value) + parseInt(widthValue.value))) + 200;
+                premiumPrice = (basePrice + 50) * parseInt(lengthValue.value) * parseInt(widthValue.value) + 375 * (2 * (parseInt(lengthValue.value) + parseInt(widthValue.value))) + 300;
+            }
             ekonomPriceElement.innerText = parseInt(ekonomPrice);
             comfortPriceElement.innerText = parseInt(comfortPrice);
             premiumPriceElement.innerText = parseInt(premiumPrice);

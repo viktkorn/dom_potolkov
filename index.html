@@ -8,8 +8,8 @@
 	<!-- <style>body{opacity: 0;}</style> -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap&_v=20220813215808" rel="stylesheet">
-	<link rel="stylesheet" href="css/style.min.css?_v=20220813215808">
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap&_v=20220823215012" rel="stylesheet">
+	<link rel="stylesheet" href="css/style.min.css?_v=20220823215012">
 	<link rel="shortcut icon" href="favicon.ico">
 	<!-- <meta name="robots" content="noindex, nofollow"> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -47,15 +47,14 @@
 				<nav class="menu__body">
 					<ul class="menu__list">
 						<li class="menu__item"><a href="" class="menu__link">Головна</a></li>
-						<li class="menu__item"><a href="" class="menu__link">Головна</a></li>
-						<li class="menu__item"><a href="" class="menu__link">Головна</a></li>
-						<li class="menu__item"><a href="" class="menu__link">Головна</a></li>
-						<li class="menu__item"><a href="" class="menu__link">Головна</a></li>
-						<li class="menu__item"><a href="" class="menu__link">Головна</a></li>
-						<li class="menu__item"><a href="" class="menu__link">Головна</a></li>
-						<li class="menu__item"><a href="" class="menu__link">Головна</a></li>
-						<li class="menu__item"><a href="" class="menu__link">Головна</a></li>
-						<li class="menu__item"><a href="" class="menu__link">Головна</a></li>
+						<li class="menu__item"><a href="" class="menu__link">Розрахунок вартості</a></li>
+						<li class="menu__item"><a href="" class="menu__link">Відео-відгуки</a></li>
+						<li class="menu__item"><a href="" class="menu__link">Рекомендації</a></li>
+						<li class="menu__item"><a href="" class="menu__link">Готові проекти</a></li>
+						<li class="menu__item"><a href="" class="menu__link">Види</a></li>
+						<li class="menu__item"><a href="" class="menu__link">Гарантії</a></li>
+						<li class="menu__item"><a href="" class="menu__link">Відгуки</a></li>
+						<li class="menu__item"><a href="" class="menu__link">Порівняння</a></li>
 					</ul>
 				</nav>
 			</div>
@@ -67,12 +66,15 @@
 					<div class="ceiling__container">
 						<div class="ceiling__content">
 							<h1 class="ceiling__title title title_s64">
-								Екологічні натяжні стелі в Дніпрі
+								Натяжні стелі в&nbsp;Дніпрі
 							</h1>
 							<div class="ceiling__text text">
 								<h3>Отримайте повну <b>консультацію</b> та точну <b>вартість</b> натяжних стель від <b>головного технолога за&nbsp;40&nbsp;хвилин</b> не виходячи з дому</h3>
 							</div>
-							<a href="" type="submit" class="ceiling__button button-main">Отримати консультацію</a>
+							<form data-ajax method="POST" class="ceiling__form" action="sendmail.php">
+								<input data-validate data-required="phone" name="form[]" type="tel" class="ceiling__input" placeholder="Введіть номер телефону">
+								<button type="submit" class="button-main ceiling__button">Отримати консультацію</button>
+							</form>
 							<div class="ceiling__benefits">
 								<div class="benefits-column">
 									<div class="ceiling__benefits__item">
@@ -376,6 +378,9 @@
 										<img src="img/tabs/bedroom-01.jpg" alt="Image description" class="tab__slide-img">
 									</div>
 									<div class="tab__content">
+										<h5 class="tab__content-title">
+											Матеріали та параметри, які впливають на&nbsp;загальну вартість:
+										</h5>
 										<p class="tab__content-text">
 											Площа - 17,56м²<br>
 											Периметр - 18,47 м.п.<br>
@@ -386,7 +391,6 @@
 											Підвісні світильники
 										</p>
 										<p class="tab__content-price">Ціна 18372 ГРН</p>
-										<a href="" class="tab__content-btn button">Хочу таку стелю</a>
 									</div>
 								</div>
 								<div class="tab__slider swiper-slide">
@@ -394,6 +398,9 @@
 										<img src="img/tabs/bedroom-02.jpg" alt="Image description" class="tab__slide-img">
 									</div>
 									<div class="tab__content">
+										<h5 class="tab__content-title">
+											Матеріали та параметри, які впливають на&nbsp;загальну вартість:
+										</h5>
 										<p class="tab__content-text">
 											Площа - 10,14 м²<br>
 											Периметр - 12,8 м.п.<br>
@@ -403,7 +410,6 @@
 											Люстри
 										</p>
 										<p class="tab__content-price">Ціна 6243 ГРН</p>
-										<a href="" class="tab__content-btn button">Хочу таку стелю</a>
 									</div>
 								</div>
 								<div class="tab__slider swiper-slide">
@@ -411,6 +417,9 @@
 										<img src="img/tabs/bedroom-03.jpg" alt="Image description" class="tab__slide-img">
 									</div>
 									<div class="tab__content">
+										<h5 class="tab__content-title">
+											Матеріали та параметри, які впливають на&nbsp;загальну вартість:
+										</h5>
 										<p class="tab__content-text">
 											Площа - 13,54 м²<br>
 											Периметр - 14,76 м.п.<br>
@@ -421,10 +430,10 @@
 											Підвісні світильники
 										</p>
 										<p class="tab__content-price">Ціна 10941 ГРН</p>
-										<a href="" class="tab__content-btn button">Хочу таку стелю</a>
 									</div>
 								</div>
 							</div>
+							<div class="swiper-pagination"></div>
 							<button type="button" class="swiper-button swiper-button-prev"></button>
 							<button type="button" class="swiper-button swiper-button-next"></button>
 						</div>
@@ -435,6 +444,9 @@
 										<img src="img/tabs/kitchen-01.jpg" alt="Image description" class="tab__slide-img">
 									</div>
 									<div class="tab__content">
+										<h5 class="tab__content-title">
+											Матеріали та параметри, які впливають на&nbsp;загальну вартість:
+										</h5>
 										<p class="tab__content-text">
 											Площа - 10,8 м²<br>
 											Примикання зі вставкою<br>
@@ -444,7 +456,6 @@
 											Підвісні світильники
 										</p>
 										<p class="tab__content-price">Ціна 3439 ГРН</p>
-										<a href="" class="tab__content-btn button">Хочу таку стелю</a>
 									</div>
 								</div>
 								<div class="tab__slider swiper-slide">
@@ -452,6 +463,9 @@
 										<img src="img/tabs/kitchen-02.jpg" alt="Image description" class="tab__slide-img">
 									</div>
 									<div class="tab__content">
+										<h5 class="tab__content-title">
+											Матеріали та параметри, які впливають на&nbsp;загальну вартість:
+										</h5>
 										<p class="tab__content-text">
 											Площа - 12,36 м²<br>
 											Тіньове примикання<br>
@@ -461,7 +475,6 @@
 											Точкові світильники
 										</p>
 										<p class="tab__content-price">Ціна 8106 ГРН</p>
-										<a href="" class="tab__content-btn button">Хочу таку стелю</a>
 									</div>
 								</div>
 								<div class="tab__slider swiper-slide">
@@ -469,6 +482,9 @@
 										<img src="img/tabs/kitchen-03.jpg" alt="Image description" class="tab__slide-img">
 									</div>
 									<div class="tab__content">
+										<h5 class="tab__content-title">
+											Матеріали та параметри, які впливають на&nbsp;загальну вартість:
+										</h5>
 										<p class="tab__content-text">
 											Площа - 13,43 м²<br>
 											Периметр - 15,22 м.п.<br>
@@ -478,7 +494,6 @@
 											Прихований карниз
 										</p>
 										<p class="tab__content-price">Ціна 17543 ГРН</p>
-										<a href="" class="tab__content-btn button">Хочу таку стелю</a>
 									</div>
 								</div>
 							</div>
@@ -492,6 +507,9 @@
 										<img src="img/tabs/living_room_01.jpg" alt="Image description" class="tab__slide-img">
 									</div>
 									<div class="tab__content">
+										<h5 class="tab__content-title">
+											Матеріали та параметри, які впливають на&nbsp;загальну вартість:
+										</h5>
 										<p class="tab__content-text">
 											Площа - 37,09 м²<br>
 											Периметр - 27,45 м.п.<br>
@@ -502,7 +520,6 @@
 											Підвісні світильники
 										</p>
 										<p class="tab__content-price">Ціна 18340 ГРН</p>
-										<a href="" class="tab__content-btn button">Хочу таку стелю</a>
 									</div>
 								</div>
 								<div class="tab__slider swiper-slide">
@@ -510,6 +527,9 @@
 										<img src="img/tabs/living_room_02.jpg" alt="Image description" class="tab__slide-img">
 									</div>
 									<div class="tab__content">
+										<h5 class="tab__content-title">
+											Матеріали та параметри, які впливають на&nbsp;загальну вартість:
+										</h5>
 										<p class="tab__content-text">
 											Площа - 14,64 м²<br>
 											Периметр - 15,36 м.п.<br>
@@ -519,7 +539,6 @@
 											Підвісні світильники
 										</p>
 										<p class="tab__content-price">Ціна 29160 ГРН</p>
-										<a href="" class="tab__content-btn button">Хочу таку стелю</a>
 									</div>
 								</div>
 								<div class="tab__slider swiper-slide">
@@ -527,6 +546,9 @@
 										<img src="img/tabs/living_room_03.jpg" alt="Image description" class="tab__slide-img">
 									</div>
 									<div class="tab__content">
+										<h5 class="tab__content-title">
+											Матеріали та параметри, які впливають на&nbsp;загальну вартість:
+										</h5>
 										<p class="tab__content-text">
 											Площа - 25,3 м²<br>
 											Периметр - 27,67 м.п.<br>
@@ -537,7 +559,6 @@
 											Підвісні світильники
 										</p>
 										<p class="tab__content-price">Ціна 22404 ГРН</p>
-										<a href="" class="tab__content-btn button">Хочу таку стелю</a>
 									</div>
 								</div>
 							</div>
@@ -551,6 +572,9 @@
 										<img src="img/tabs/bathroom-01.jpg" alt="Image description" class="tab__slide-img">
 									</div>
 									<div class="tab__content">
+										<h5 class="tab__content-title">
+											Матеріали та параметри, які впливають на&nbsp;загальну вартість:
+										</h5>
 										<p class="tab__content-text">
 											Площа - 6,01 м²<br>
 											Периметр - 11.85 м.п.<br>
@@ -561,7 +585,6 @@
 											Точкові світильники
 										</p>
 										<p class="tab__content-price">Ціна 7713 ГРН</p>
-										<a href="" class="tab__content-btn button">Хочу таку стелю</a>
 									</div>
 								</div>
 								<div class="tab__slider swiper-slide">
@@ -569,6 +592,9 @@
 										<img src="img/tabs/bathroom-02.jpg" alt="Image description" class="tab__slide-img">
 									</div>
 									<div class="tab__content">
+										<h5 class="tab__content-title">
+											Матеріали та параметри, які впливають на&nbsp;загальну вартість:
+										</h5>
 										<p class="tab__content-text">
 											Площа - 0,53 м²<br>
 											Периметр - 3,25 м.п.<br>
@@ -577,7 +603,6 @@
 											Світлова стеля
 										</p>
 										<p class="tab__content-price">Ціна 6276 ГРН</p>
-										<a href="" class="tab__content-btn button">Хочу таку стелю</a>
 									</div>
 								</div>
 								<div class="tab__slider swiper-slide">
@@ -585,6 +610,9 @@
 										<img src="img/tabs/bathroom-03.jpg" alt="Image description" class="tab__slide-img">
 									</div>
 									<div class="tab__content">
+										<h5 class="tab__content-title">
+											Матеріали та параметри, які впливають на&nbsp;загальну вартість:
+										</h5>
 										<p class="tab__content-text">
 											Площа - 4,7 м²<br>
 											Периметр - 6,58 м.п.<br>
@@ -594,7 +622,6 @@
 											Світлові лінії
 										</p>
 										<p class="tab__content-price">Ціна 14680 ГРН</p>
-										<a href="" class="tab__content-btn button">Хочу таку стелю</a>
 									</div>
 								</div>
 							</div>
@@ -608,6 +635,9 @@
 										<img src="img/tabs/corridor-01.jpg" alt="Image description" class="tab__slide-img">
 									</div>
 									<div class="tab__content">
+										<h5 class="tab__content-title">
+											Матеріали та параметри, які впливають на&nbsp;загальну вартість:
+										</h5>
 										<p class="tab__content-text">
 											Площа - 6,09 м²<br>
 											Периметр - 12,62 м.п.<br>
@@ -617,7 +647,6 @@
 											Підвісні світильники
 										</p>
 										<p class="tab__content-price">Ціна 3400 ГРН</p>
-										<a href="" class="tab__content-btn button">Хочу таку стелю</a>
 									</div>
 								</div>
 								<div class="tab__slider swiper-slide">
@@ -625,6 +654,9 @@
 										<img src="img/tabs/corridor-02.jpg" alt="Image description" class="tab__slide-img">
 									</div>
 									<div class="tab__content">
+										<h5 class="tab__content-title">
+											Матеріали та параметри, які впливають на&nbsp;загальну вартість:
+										</h5>
 										<p class="tab__content-text">
 											Площа - 3,06 м²<br>
 											Периметр - 7,75 м.п.<br>
@@ -634,7 +666,6 @@
 											Споти
 										</p>
 										<p class="tab__content-price">Ціна 3400 ГРН</p>
-										<a href="" class="tab__content-btn button">Хочу таку стелю</a>
 									</div>
 								</div>
 								<div class="tab__slider swiper-slide">
@@ -642,6 +673,9 @@
 										<img src="img/tabs/corridor-03.jpg" alt="Image description" class="tab__slide-img">
 									</div>
 									<div class="tab__content">
+										<h5 class="tab__content-title">
+											Матеріали та параметри, які впливають на&nbsp;загальну вартість:
+										</h5>
 										<p class="tab__content-text">
 											Площа - 18,51 м²<br>
 											Периметр - 23,8 м.п.<br>
@@ -651,13 +685,146 @@
 											Світлові лінії
 										</p>
 										<p class="tab__content-price">Ціна 18955 ГРН</p>
-										<a href="" class="tab__content-btn button">Хочу таку стелю</a>
 									</div>
 								</div>
 							</div>
 							<button type="button" class="swiper-button swiper-button-prev"></button>
 							<button type="button" class="swiper-button swiper-button-next"></button>
 						</div>
+					</div>
+				</div>
+			</section>
+			<section class="popup__section page__popup">
+				<div class="popup__container-big">
+					<h2 class="popup__title">
+						Натяжна стеля це не тільки полотно!
+					</h2>
+					<p class="popup__text">
+						Дізнайтесь детальніше про види натяжної стелі та про додаткові елементи декора, <br>
+						котрі також впливають на вартість
+					</p>
+					<div class="popup__inner">
+						<div class="popup__item">
+							<a href="#" href="#" data-popup="#popup" class="popup__link">
+								<img src="img/popup/insert-01.jpg" alt="Натяжна стеля зі вставкою" class="popup__img">
+								<button class="button popup__btn">Детальніше</button>
+							</a>
+							<h4 class="popup__item-title">
+								Натяжна стеля зі вставкою
+							</h4>
+							<p class="popup__item-text">
+								Стандартний вид натяжної стелі. Декоративна вставка - ПВХ плинтус товщиною в 1 см, який встановлюється по периметру кімнати
+							</p>
+						</div>
+						<div class="popup__item">
+							<a href="#" data-popup="#popup" class="popup__link">
+								<img src="img/popup/shadow-01.jpg" alt="Тіньова натяжна стеля" class="popup__img">
+								<button class="button popup__btn">Детальніше</button>
+							</a>
+							<h4 class="popup__item-title">
+								Тіньова натяжна стеля
+							</h4>
+							<p class="popup__item-text">
+								Дизайнерське рішення для поєднання площини стелі зі стіною, при якому остається правильний, рівний тіневий зазор в 6 мм
+							</p>
+						</div>
+						<div class="popup__item">
+							<a href="#" data-popup="#popup" class="popup__link">
+								<img src="img/popup/gapless-01.jpg" alt="Безщілева натяжна стеля" class="popup__img">
+								<button class="button popup__btn">Детальніше</button>
+							</a>
+							<h4 class="popup__item-title">
+								Безщілева натяжна стеля
+							</h4>
+							<p class="popup__item-text">
+								Стеля прилягає до стіни ідеально рівно без зазорів взагалі
+							</p>
+						</div>
+						<div class="popup__item">
+							<a href="#" data-popup="#popup" class="popup__link">
+								<img src="img/popup/soaring-01.jpg" alt="Натяжна стеля з підсвіткою" class="popup__img">
+								<button class="button popup__btn">Детальніше</button>
+							</a>
+							<h4 class="popup__item-title">
+								Натяжна стеля з підсвіткою
+							</h4>
+							<p class="popup__item-text">
+								Спеціальний вид натяжної стелі, за допомогою якого на стіну падає рівно- мірне освітлення
+							</p>
+						</div>
+						<div class="popup__item">
+							<a href="#" data-popup="#popup" class="popup__link">
+								<img src="img/popup/light-lines-01.jpg" alt="Світлові лінії на натяжній стелі" class="popup__img">
+								<button class="button popup__btn">Детальніше</button>
+							</a>
+							<h4 class="popup__item-title">
+								Світлові лінії на натяжній стелі
+							</h4>
+							<p class="popup__item-text">
+								Відносно новий вид освітлення кімнати. Явною перевагою перед звичайними точками освітлення є рівномірне світло по всій кімнаті, яке не напружує зір
+							</p>
+						</div>
+						<div class="popup__item">
+							<a href="#" data-popup="#popup" class="popup__link">
+								<img src="img/popup/track-01.jpg" alt="Трекові системи освітлення" class="popup__img">
+								<button class="button popup__btn">Детальніше</button>
+							</a>
+							<h4 class="popup__item-title">
+								Трекові системи освітлення
+							</h4>
+							<p class="popup__item-text">
+								Існують трекові системи як механічні, так і магнітні. Також є різниця в їх встановленні. Бувають вбудовані і накладні
+							</p>
+						</div>
+						<div class="popup__item">
+							<a href="#" data-popup="#popup" class="popup__link">
+								<img src="img/popup/point-light-01.jpg" alt="Точкові світильники" class="popup__img">
+								<button class="button popup__btn">Детальніше</button>
+							</a>
+							<h4 class="popup__item-title">
+								Точкові світильники
+							</h4>
+							<p class="popup__item-text">
+								Стандартний вид освітлення. Бувають круглими, квадратними, подвійними
+							</p>
+						</div>
+						<div class="popup__item">
+							<a href="#" data-popup="#popup" class="popup__link">
+								<img src="img/popup/hidden-cornice-01.jpg" alt="Прихований карниз для штори" class="popup__img">
+								<button class="button popup__btn">Детальніше</button>
+							</a>
+							<h4 class="popup__item-title">
+								Прихований карниз для штори
+							</h4>
+							<p class="popup__item-text">
+								Штора
+							</p>
+						</div>
+						<div class="popup__item">
+							<a href="#" data-popup="#popup" class="popup__link">
+								<img src="img/popup/niches-01.jpg" alt="Ніші в натяжній стелі" class="popup__img">
+								<button class="button popup__btn">Детальніше</button>
+							</a>
+							<h4 class="popup__item-title">
+								Ніші в натяжній стелі
+							</h4>
+							<p class="popup__item-text">
+								Спеіальний вид натяжної стелі, за допомогою якого на стіну падає рівно-мірне освітлення
+							</p>
+						</div>
+					</div>
+					<div class="popup-callback">
+						<h2 class="popup-callback__title">
+							Не розумієте яку стелю бажаєте?
+						</h2>
+						<p class="popup-callback__text">
+							Наш менеджер <b>розповість про кожен вид</b> натяжної стелі, підкаже <b>технічні характеристики</b>, назве <b>приблизну вартість</b>. Вкажіть як можна до Вас звертатися, та за яким номером Ви на зв’язку:
+						</p>
+						<form data-ajax method="POST" class="popup-callback__form" action="sendmail.php">
+							<input type="text" class="popup-callback__form-name" placeholder="Як до Вас звертатися?">
+							<input data-validate data-required="phone" name="form[]" type="tel" class="popup-callback__form-phone" placeholder="За яким номером Ви на зв’язку? ">
+							<button type="submit" class="button-main popup-callback__form-button">Отримати консультацію</button>
+						</form>
 					</div>
 				</div>
 			</section>
@@ -726,17 +893,80 @@
 	</div>
 </footer> -->
 	</div>
-	<!-- <div id="popup" aria-hidden="true" class="popup">
-	<div class="popup__wrapper">
-		<div class="popup__content">
-			<button data-close type="button" class="popup__close">Закрыть</button>
-			<div class="popup__text">
-				Text
+	<div id="popup" aria-hidden="true" class="popup">
+		<div class="popup__wrapper">
+			<div class="popup__content">
+				<button data-close type="button" class="popup__close">X</button>
+				<h4 class="popup-slider__title">Натяжна стеля зі вставкою</h4>
+				<div class="popup-slider__inner">
+					<div class="popup-slider swiper-container gallery-top">
+						<div class="swiper-wrapper">
+							<div class="swiper-slide gallery-top-slide">
+								<img class="popup-img popup-img-large" src="img/popup/insert-popup-01.jpg" alt="">
+							</div>
+							<div class="swiper-slide gallery-top-slide">
+								<img class="popup-img popup-img-large" src="img/popup/insert-popup-02.jpg" alt="">
+							</div>
+							<div class="swiper-slide gallery-top-slide">
+								<img class="popup-img popup-img-large" src="img/popup/insert-popup-03.jpg" alt="">
+							</div>
+							<div class="swiper-slide gallery-top-slide">
+								<img class="popup-img popup-img-large" src="img/popup/insert-popup-04.jpg" alt="">
+							</div>
+							<div class="swiper-slide gallery-top-slide">
+								<img class="popup-img popup-img-large" src="img/popup/insert-popup-05.jpg" alt="">
+							</div>
+						</div>
+						<div class="swiper-button-next"></div>
+						<div class="swiper-button-prev"></div>
+					</div>
+					<div class="popup-info__inner">
+						<p class="popup-info__text">
+							В данному виді натяжної стелі використовуєтья <b>алюмінієвий</b> або <b>пластиковий</b> профіль, який утворює технологічний зазор між стіною та полотном. Декоративна вставка служить “заглушкою” цього зазору. <br><br>
+							Декоративна вставка - ПВХ плинтус товщиною в 1 см, який встановлюється по периметру кімнати
+						</p>
+						<div class="popup-contact">
+							<h6 class="popup-contact_title">Додаткова інформація:</h6>
+							<div class="popup-contact__inner">
+								<div class="popup-phone__box">
+									<a class="popup-phone__link" href="tel:0668006878">(066)-800-68-78</a>
+									<a class="popup-phone__link" href="tel:0988006878">(098)-800-68-78</a>
+								</div>
+								<div class="popup-social__box">
+									<a class="popup-social__link" href="https://link">
+										<img src="img/popup/ico-viber.png" alt="viber">
+									</a>
+									<a class="popup-social__link" href="https://link">
+										<img src="img/popup/ico-telegram.png" alt="telegram">
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div thumbsSlider="" class="gallery-thumbs">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide thumbs-slide">
+							<img class="popup-img popup-img-small" src="img/popup/insert-popup-01.jpg" alt="">
+						</div>
+						<div class="swiper-slide thumbs-slide">
+							<img class="popup-img popup-img-small" src="img/popup/insert-popup-02.jpg" alt="">
+						</div>
+						<div class="swiper-slide thumbs-slide">
+							<img class="popup-img popup-img-small" src="img/popup/insert-popup-03.jpg" alt="">
+						</div>
+						<div class="swiper-slide thumbs-slide">
+							<img class="popup-img popup-img-small" src="img/popup/insert-popup-04.jpg" alt="">
+						</div>
+						<div class="swiper-slide thumbs-slide">
+							<img class="popup-img popup-img-small" src="img/popup/insert-popup-05.jpg" alt="">
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
-</div> -->
-	<script src="js/app.min.js?_v=20220813215808"></script>
+	<script src="js/app.min.js?_v=20220823215012"></script>
 </body>
 
 </html>
