@@ -8,8 +8,8 @@
 	<!-- <style>body{opacity: 0;}</style> -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap&_v=20220823224310" rel="stylesheet">
-	<link rel="stylesheet" href="css/style.min.css?_v=20220823224310">
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,900;1,400;1,500;1,600;1,700;1,900&display=swap&_v=20220827024933" rel="stylesheet">
+	<link rel="stylesheet" href="css/style.min.css?_v=20220827024933">
 	<link rel="shortcut icon" href="favicon.ico">
 	<!-- <meta name="robots" content="noindex, nofollow"> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -46,26 +46,26 @@
 			<div class="header__menu menu">
 				<nav class="menu__body">
 					<ul class="menu__list">
-						<li class="menu__item"><a href="" class="menu__link">Головна</a></li>
-						<li class="menu__item"><a href="" class="menu__link">Розрахунок вартості</a></li>
-						<li class="menu__item"><a href="" class="menu__link">Відео-відгуки</a></li>
-						<li class="menu__item"><a href="" class="menu__link">Рекомендації</a></li>
-						<li class="menu__item"><a href="" class="menu__link">Готові проекти</a></li>
-						<li class="menu__item"><a href="" class="menu__link">Види</a></li>
-						<li class="menu__item"><a href="" class="menu__link">Гарантії</a></li>
-						<li class="menu__item"><a href="" class="menu__link">Відгуки</a></li>
-						<li class="menu__item"><a href="" class="menu__link">Порівняння</a></li>
+						<li class="menu__item"><a href="#" data-goto-header data-goto=".ceiling__title" class="menu__link">Головна</a></li>
+						<li class="menu__item"><a href="#" data-goto-header data-goto=".calculator__container-title" class="menu__link">Розрахунок вартості</a></li>
+						<li class="menu__item"><a href="#" data-goto-header data-goto=".reviews__title" class="menu__link">Відео-відгуки</a></li>
+						<li class="menu__item"><a href="#" data-goto-header data-goto=".recommendations" class="menu__link">Рекомендації</a></li>
+						<li class="menu__item"><a href="#" data-goto-header data-goto=".tabs" class="menu__link">Готові проекти</a></li>
+						<li class="menu__item"><a href="#" data-goto-header data-goto=".popup__section" class="menu__link">Види</a></li>
+						<li class="menu__item"><a href="#" data-goto-header data-goto=".assurance__section" class="menu__link">Гарантії</a></li>
+						<li class="menu__item"><a href="#" data-goto-header data-goto=".assurance__rating" class="menu__link">Відгуки</a></li>
+						<li class="menu__item"><a href="#" data-goto-header data-goto=".compare" class="menu__link">Порівняння</a></li>
 					</ul>
 				</nav>
 			</div>
 		</header>
 
 		<main class="page">
-			<section data-prlx-mouse-wrapper class="page__ceiling ceiling">
+			<section class="page__ceiling ceiling">
 				<div class="ceiling__container-big">
 					<div class="ceiling__container">
 						<div class="ceiling__content">
-							<h1 class="ceiling__title title title_s64">
+							<h1 data-watch="navigator" class="ceiling__title title title_s64">
 								Натяжні стелі в&nbsp;Дніпрі
 							</h1>
 							<div class="ceiling__text text">
@@ -142,7 +142,7 @@
 					</div>
 					<div class="calculator">
 						<div class="calculator__container">
-							<h2 class="calculator__container-title">
+							<h2 data-watch="navigator" class="calculator__container-title">
 								Розрахунок приблизної ціни натяжної стелі з монтажем
 							</h2>
 							<div class="calculator__inner">
@@ -208,9 +208,6 @@
 										<li class="calculator__description-list__item">Люстри/світильники</li>
 										<li class="calculator__description-list__item">Накладний карниз</li>
 									</ul>
-									<div class="calculator__description-button">
-										<a href="" type="submit" class="button">Дізнатися точну вартість</a>
-									</div>
 								</div>
 								<div class="calculator__description-column">
 									<h4 class="calculator__description-title">
@@ -222,13 +219,10 @@
 									<ul class="calculator__description-list">
 										<li class="calculator__description-list__item">Алюмінієвий профіль</li>
 										<li class="calculator__description-list__item">Полотно MSD Premium</li>
-										<li class="calculator__description-list__item">З декоративною вставкою</li>
+										<li class="calculator__description-list__item">Декоративна вставка</li>
 										<li class="calculator__description-list__item">Люстри/світильники</li>
 										<li class="calculator__description-list__item">Прихований карниз</li>
 									</ul>
-									<div class="calculator__description-button">
-										<a href="" type="submit" class="button">Дізнатися точну вартість</a>
-									</div>
 								</div>
 								<div class="calculator__description-column">
 									<h4 class="calculator__description-title">
@@ -239,22 +233,31 @@
 									</p>
 									<ul class="calculator__description-list">
 										<li class="calculator__description-list__item">Тіньовий профіль</li>
-										<li class="calculator__description-list__item">Полотно MSD Premium/Teqtum/Lumfer/Descor/Pongs</li>
-										<li class="calculator__description-list__item">Світлові лінії/паруюча стеля/магнітні трекові світильники</li>
+										<li class="calculator__description-list__item">Полотно MSD Premium/Teqtum/ Lumfer/Descor/Pongs</li>
+										<li class="calculator__description-list__item">Світлові лінії/паруюча стеля/ магнітні трекові світильники</li>
 										<li class="calculator__description-list__item">Прихований електро/-карниз</li>
 									</ul>
-									<div class="calculator__description-button">
-										<a href="" type="submit" class="button">Дізнатися точну вартість</a>
-									</div>
 								</div>
 							</div>
+							<h3 class="calculator__container-title">
+								З’явилися питання шодо вибору матеріалів?
+							</h3>
+							<p class="calculator__container-text">
+								Наші менеджери підберуть Вам оптимальний варіант <br>
+								натяжної стелі враховуючи Ваш бюджет. <br>
+								Вкажіть номер телефону, щоб отримати допомогу в виборі матеріалів
+							</p>
+							<form data-ajax method="POST" class="calculator__form" action="sendmail.php">
+								<input data-validate data-required="phone" name="form[]" type="tel" class="calculator__form-phone" placeholder="Введіть номер телефону">
+								<button type="submit" class="button-main calculator__form-button">Підібрати матеріали</button>
+							</form>
 						</div>
 					</div>
 				</div>
 			</section>
 			<section id="reviews" class="reviews page__reviews">
 				<div class="rewiews__container-big">
-					<h3 class="reviews__title">
+					<h3 data-watch="navigator" class="reviews__title">
 						Відео-відгуки про нашу компанію
 					</h3>
 					<p class="reviews__text">
@@ -284,7 +287,7 @@
 					</ul>
 				</div>
 			</section>
-			<section id="recommendations" class="recommendations page__recommendations">
+			<section data-watch="navigator" id="recommendations" class="recommendations page__recommendations">
 				<div class="rewiews__container-big">
 					<h2 class="recommendations__title">
 						Рекомендації по вибору натяжної стелі
@@ -297,7 +300,7 @@
 							<ul class="recommendations__info-list">
 								<li class="recommendations__info-item">
 									<h5 class="recommendations__info-item__title">
-										Вибираєте стелю за цінами?
+										Вибираєте стелю за цінам?
 									</h5>
 									<p class="recommendations__info-item__text">
 										«Вибирайте правильно – не вірте розмитим цінам за м2 в інтернеті. Порівнюйте вже точну, докладну, зафіксовану вартість після консультації та заміру Вашого житла»
@@ -321,10 +324,10 @@
 								</li>
 								<li class="recommendations__info-item">
 									<h5 class="recommendations__info-item__title">
-										Вибір полотна впливає на загальний інтер'єр кімнати
+										Вибір полотна впливає на&nbsp;загальний інтер'єр кімнати
 									</h5>
 									<p class="recommendations__info-item__text">
-										«Я привезу каталог усіх полотен, які у нас є, щоб Ви наживо змогли вибрати фактуру та колір полотна»
+										«Я привезу каталог усіх полотен, які у нас є, щоб Ви наживо змогли вибрати фактуру та&nbsp;колір полотна»
 									</p>
 								</li>
 							</ul>
@@ -345,16 +348,16 @@
 						Отримайте детальну консультацію
 					</h2>
 					<p class="callback__text">
-						Щоб отримати детальну консультацію, точний, детальний прорахунок стелі по кожній позиції, отримати розгорнуту допомогу по освітленню укажіть зручну для Вас дату:
+						Щоб отримати <b>детальну консультацію,</b> точний, <b>детальний прорахунок</b> стелі по кожній позиції,&nbsp;отримати розгорнуту <b>допомогу по освітленню</b> укажіть зручну для Вас дату:
 					</p>
 					<form data-ajax method="POST" class="callback__form" action="sendmail.php">
-						<input data-validate data-required="date" name="form[]" data-datepicker type="text" class="callback__form-date" placeholder="дд. мм. гггг">
+						<input data-validate data-required="date" name="form[]" data-datepicker type="text" class="callback__form-date" placeholder="дд.мм.рррр">
 						<input data-validate data-required="phone" name="form[]" type="tel" class="callback__form-phone" placeholder="Введіть номер телефону">
-						<button type="submit" class="button-main callback__form-button">Отримати консультацію</button>
+						<button type="submit" class="button-main callback__form-button">Запросити технолога</button>
 					</form>
 				</div>
 			</section>
-			<section class="tabs page__tabs">
+			<section data-watch="navigator" class="tabs page__tabs">
 				<div class="tabs__container-big">
 					<h2 class="tabs__title">
 						7000+ реалізованих проектів за 11 років<br>
@@ -694,7 +697,7 @@
 					</div>
 				</div>
 			</section>
-			<section class="popup__section page__popup">
+			<section data-watch="navigator" class="popup__section page__popup">
 				<div class="popup__container-big">
 					<h2 class="popup__title">
 						Натяжна стеля це не тільки полотно!
@@ -713,7 +716,7 @@
 								Натяжна стеля зі вставкою
 							</h4>
 							<p class="popup__item-text">
-								Стандартний вид натяжної стелі. Декоративна вставка - ПВХ плинтус товщиною в 1 см, який встановлюється по периметру кімнати
+								Стандартний вид натяжної стелі. Декоративна вставка - ПВХ плинтус товщиною в 1 см, який встановлюється по&nbsp;периметру кімнати
 							</p>
 						</div>
 						<div class="popup__item">
@@ -737,7 +740,7 @@
 								Безщілева натяжна стеля
 							</h4>
 							<p class="popup__item-text">
-								Стеля прилягає до стіни ідеально рівно без зазорів взагалі
+								Стеля прилягає до стіни ідеально рівно&nbsp;без зазорів взагалі
 							</p>
 						</div>
 						<div class="popup__item">
@@ -773,7 +776,8 @@
 								Трекові системи освітлення
 							</h4>
 							<p class="popup__item-text">
-								Існують трекові системи як механічні, так і магнітні. Також є різниця в їх встановленні. Бувають вбудовані і накладні
+								Існують трекові системи як механічні, так&nbsp;і магнітні. Також є різниця в їх встановленні.<br>
+								Бувають вбудовані і накладні
 							</p>
 						</div>
 						<div class="popup__item">
@@ -785,7 +789,8 @@
 								Точкові світильники
 							</h4>
 							<p class="popup__item-text">
-								Стандартний вид освітлення. Бувають круглими, квадратними, подвійними
+								Стандартний вид освітлення.<br>
+								Бувають круглими, квадратними, подвійними
 							</p>
 						</div>
 						<div class="popup__item">
@@ -828,70 +833,341 @@
 					</div>
 				</div>
 			</section>
-		</main>
-		<!-- <footer class="footer">
-	<div class="footer__container-big">
-		<div class="footer__container">
-			<div class="footer__main main-footer">
-				<div class="main-footer__info">
-					<a href="" class="main-footer__logo">
-						<img src="img/footer-logo.svg" alt="Logo">
-					</a>
-					<div class="main-footer__text text">High level experience in web design and development knowledge, producing quality work.</div>
-				</div>
-				<div class="main-footer__form form-main">
-					<div class="form-main__text text">Subscribe to stay tuned for new web design and latest updates. Let's do it!</div>
-					<form action="#" class="form-main__form form">
-						<input data-required="email" autocomplete="off" type="text" name="form[]" data-error="Error" placeholder="Enter your email" class="form__input">
-						<button type="submit" class="form__button button">Subscribe</button>
-					</form>
-				</div>
-				<div class="main-footer__contacts">
-					<div class="main-footer__social">
-						<div class="main-footer__label">Follow us</div>
-						<div class="social">
-							<a href="" class="social__item">
-								<img src="img/icons/social/01.svg" alt="Instagram">
-							</a>
-							<a href="" class="social__item">
-								<img src="img/icons/social/02.svg" alt="Facebook">
-							</a>
-							<a href="" class="social__item">
-								<img src="img/icons/social/03.svg" alt="Twitter">
-							</a>
+			<section data-watch="navigator" class="assurance__section page__assurance">
+				<div class="assurance__container-big">
+					<div class="assurance__box">
+						<h2 class="assurance__title">
+							Завдяки ретельному вибору постачальників матеріалів – впевнені в якості наших стель, тому:
+							<b>Фіксуємо гарантії в офіціальному договорі</b>
+						</h2>
+						<div class="assurance__inner">
+							<ul class="assurance__inner-list">
+								<li class="assurance__inner-item">
+									<img class="number-01" src="img/assurance/number-01.svg" alt="1">
+									рік<br>
+									сервісного<br>
+									обслуговування
+								</li>
+								<li class="assurance__inner-item">
+									<img class="number-05" src="img/assurance/number-05.svg" alt="5">
+									років<br>
+									гарантії<br>
+									на монтаж
+								</li>
+								<li class="assurance__inner-item">
+									<img class="number-12" src="img/assurance/number-12.svg" alt="12">
+									років<br>
+									гарантії<br>
+									на полотно
+								</li>
+							</ul>
 						</div>
 					</div>
-					<div class="main-footer__call-us">
-						<div class="main-footer__label">Call us</div>
-						<a href="tel:+2349123456789" class="main-footer__phone">+2349123456789</a>
+					<div data-watch="navigator" class="assurance__rating">
+						<h3 class="assurance__rating-title">
+							<img src="img/assurance/rate-5.svg" alt="5.0"> середня оцінка по відгукам <span>G</span><span class="red__color">o</span><span class="yellow__color">o</span><span>g</span><span class="green__color">l</span><span class="red__color">e</span>
+						</h3>
+						<p class="assurance__rating-text">
+							Один раз замовивши стелю у нас — рекомендують рідним і близьким
+						</p>
+						<div class="assurance__rating-box integration">
+							<img src="img/assurance/google.png" alt="Google Rating">
+						</div>
 					</div>
 				</div>
+			</section>
+			<section data-watch="navigator" class="compare page__compare">
+				<div class="compare__container-big">
+					<h2 class="compare__title">
+						Порівняння натяжної стелі з іншими видами оздоблення стелі
+					</h2>
+					<p class="compare__text">
+						В таблиці приведений аналіз найпопулярніших видів оздоблення стелі
+					</p>
+					<div class="compare__inner">
+						<table class="compare__table">
+							<thead>
+								<tr>
+									<th></th>
+									<th class="compare__table-separator"></th>
+									<th>
+										<div class="compare__table-title">
+											<h6>Пофарбована стеля</h6>
+										</div>
+									</th>
+									<th class="compare__table-separator"></th>
+									<th>
+										<div class="compare__table-title">
+											<h6>Стеля із гіпсокартону</h6>
+										</div>
+									</th>
+									<th class="compare__table-separator"></th>
+									<th>
+										<div class="compare__table-title">
+											<h6>
+												Натяжна<br>
+												стеля
+											</h6>
+										</div>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<th>
+										<div class="compare__table-title">
+											<h6>Швидкість монтажу (12м²)</h6>
+										</div>
+									</th>
+									<td class="compare__table-separator"></td>
+									<td>
+										<div class="compare__table-text">
+											<img src="img/compare/ico-date.svg" alt="Дата">
+											<p>3-4 дня</p>
+										</div>
+									</td>
+									<td class="compare__table-separator"></td>
+									<td>
+										<div class="compare__table-text">
+											<img src="img/compare/ico-date.svg" alt="Дата">
+											<p>5-7 днів</p>
+										</div>
+									</td>
+									<td class="compare__table-separator"></td>
+									<td>
+										<div class="compare__table-text">
+											<img src="img/compare/ico-time.svg" alt="Час">
+											<p>3-5 годин</p>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th>
+										<div class="compare__table-title">
+											<h6>Тріщини</h6>
+										</div>
+									</th>
+									<td class="compare__table-separator"></td>
+									<td>
+										<div class="compare__table-text">
+											<img src="img/compare/ico-big-crack.png" alt="Тріщини">
+											<p>Неминуча поява тріщин</p>
+										</div>
+									</td>
+									<td class="compare__table-separator"></td>
+									<td>
+										<div class="compare__table-text">
+											<img src="img/compare/ico-small-crack.png" alt="Тріщини">
+											<p>Можлива поява тріщин</p>
+										</div>
+									</td>
+									<td class="compare__table-separator"></td>
+									<td>
+										<div class="compare__table-text">
+											<img src="img/compare/ico-success.png" alt="Успіх">
+											<p>Тріщини відсутні</p>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th>
+										<div class="compare__table-title">
+											<h6>Захист від затоплення</h6>
+										</div>
+									</th>
+									<td class="compare__table-separator"></td>
+									<td>
+										<div class="compare__table-text">
+											<img src="img/compare/ico-error.png" alt="Помилка">
+											<p>Не захищає кімнату</p>
+										</div>
+									</td>
+									<td class="compare__table-separator"></td>
+									<td>
+										<div class="compare__table-text">
+											<img src="img/compare/ico-error.png" alt="Помилка">
+											<p>Не захищає кімнату</p>
+										</div>
+									</td>
+									<td class="compare__table-separator"></td>
+									<td>
+										<div class="compare__table-text">
+											<img src="img/compare/ico-success.png" alt="Успіх">
+											<p>
+												Витримує<br>
+												до 100 л на 1 м²
+											</p>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th>
+										<div class="compare__table-title">
+											<h6>Опуск стелі</h6>
+										</div>
+									</th>
+									<td class="compare__table-separator"></td>
+									<td>
+										<div class="compare__table-text">
+											<img src="img/compare/ico-error.png" alt="Помилка">
+											<p>Відсутній</p>
+										</div>
+									</td>
+									<td class="compare__table-separator"></td>
+									<td>
+										<div class="compare__table-text">
+											<img src="img/compare/ico-size.png" alt="Розмір">
+											<p>4 - 5 см</p>
+										</div>
+									</td>
+									<td class="compare__table-separator"></td>
+									<td>
+										<div class="compare__table-text">
+											<img src="img/compare/ico-size.png" alt="Розмір">
+											<p>Від 4 см</p>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th>
+										<div class="compare__table-title">
+											<h6>Експлуатаційні властивості</h6>
+										</div>
+									</th>
+									<td class="compare__table-separator"></td>
+									<td>
+										<div class="compare__table-text">
+											<img src="img/compare/ico-big-crack.png" alt="Тріщини">
+											<p>Можливе відлущування штукатурки</p>
+										</div>
+									</td>
+									<td class="compare__table-separator"></td>
+									<td>
+										<div class="compare__table-text">
+											<img src="img/compare/ico-big-crack.png" alt="Тріщини">
+											<p>Можливе відлущування штукатурки</p>
+										</div>
+									</td>
+									<td class="compare__table-separator"></td>
+									<td>
+										<div class="compare__table-text">
+											<img src="img/compare/ico-success.png" alt="Успіх">
+											<p>Ідеальне збереження вигляду</p>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th>
+										<div class="compare__table-title">
+											<h6>Противопожежні властивості</h6>
+										</div>
+									</th>
+									<td class="compare__table-separator"></td>
+									<td>
+										<div class="compare__table-text">
+											<img src="img/compare/ico-success.png" alt="Успіх">
+											<p>Не підтримує горіння</p>
+										</div>
+									</td>
+									<td class="compare__table-separator"></td>
+									<td>
+										<div class="compare__table-text">
+											<img src="img/compare/ico-success.png" alt="Успіх">
+											<p>Не підтримує горіння</p>
+										</div>
+									</td>
+									<td class="compare__table-separator"></td>
+									<td>
+										<div class="compare__table-text">
+											<img src="img/compare/ico-success.png" alt="Успіх">
+											<p>Не підтримує горіння</p>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<th>
+										<div class="compare__table-title">
+											<h6>Можливість вологого прибирання</h6>
+										</div>
+									</th>
+									<td class="compare__table-separator"></td>
+									<td>
+										<div class="compare__table-text">
+											<img src="img/compare/ico-error.png" alt="Помилка">
+											<p>Відсутня</p>
+										</div>
+									</td>
+									<td class="compare__table-separator"></td>
+									<td>
+										<div class="compare__table-text">
+											<img src="img/compare/ico-error.png" alt="Помилка">
+											<p>Відсутня</p>
+										</div>
+									</td>
+									<td class="compare__table-separator"></td>
+									<td>
+										<div class="compare__table-text">
+											<img src="img/compare/ico-success.png" alt="Успіх">
+											<p>Присутня</p>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</section>
+			<section class="contact page__contact">
+				<div class="contact__container-big">
+					<h3 class="contact__title">
+						Ми готові відповісти Вам на будь-які питання
+					</h3>
+					<p class="contact__text">
+						Зв'яжіться з нами зручним для Вас способом
+					</p>
+					<div class="contact__inner">
+						<div class="contact__callback">
+							<p class="contact__callback-text">
+								<b>Залиште номер,</b> позвонимо Вам напротязі 15 хвилин в робочий час Пн&#8209;Вс, 9:00-21:00
+							</p>
+							<form data-ajax method="POST" class="contact__form" action="sendmail.php">
+								<input data-validate data-required="phone" name="form[]" type="tel" class="contact__input" placeholder="Введіть номер телефону">
+								<button type="submit" class="button-main contact__button">Отримати консультацію</button>
+							</form>
+						</div>
+						<div class="contact__box">
+							<h6 class="contact__box-title">Звоніть</h6>
+							<p class="contact__box-text">Пн-Вс, 9:00-21:00</p>
+							<p class="contact__box-phone">
+								<a class="contact__box-phone__link" href="tel:0668006878">(066) 800 68 78</a>
+								<a class="contact__box-phone__link" href="tel:0988006878">(098) 800 68 78</a>
+								<a class="contact__box-phone__link" href="tel:0738006878">(073) 800 68 78</a>
+							</p>
+							<div class="contact__box-social">
+								<a class="contact__box-social__link" href="https://link">
+									<img src="img/ico-viber.png" alt="viber">
+								</a>
+								<a class="contact__box-social__link" href="https://link">
+									<img src="img/ico-telegram.png" alt="telegram">
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+		<footer class="footer">
+			<div class="footer__container-big">
+				<div class="header__logo footer__logo">
+					<a href="#" class="header__logo-link footer__logo-link"><img src="img/logo-dnp.png" alt="ДНП | ДОМ НАТЯЖНЫХ ПОТОЛКОВ"></a>
+					<h2 class="header__logo-title footer__logo-title">Встановлюємо натяжні стелі в Харкові та Дніпрі з 2011 року</h2>
+				</div>
+				<p class="footer__copyright">
+					Copyright 2022<br>
+					Усі права захищені
+				</p>
 			</div>
-			<div class="footer__bottom">
-				<div class="footer__copy">© 2021 All Rights Reserved</div>
-				<nav class="footer__menu menu-footer">
-					<ul class="menu-footer__list">
-						<li class="menu-footer__item">
-							<a href="" class="menu-footer__link">Privacy Policy</a>
-						</li>
-						<li class="menu-footer__item">
-							<a href="" class="menu-footer__link">Terms of Use</a>
-						</li>
-						<li class="menu-footer__item">
-							<a href="" class="menu-footer__link">Sales and Refunds</a>
-						</li>
-						<li class="menu-footer__item">
-							<a href="" class="menu-footer__link">Legal</a>
-						</li>
-						<li class="menu-footer__item">
-							<a href="" class="menu-footer__link">Site Map</a>
-						</li>
-					</ul>
-				</nav>
-			</div>
-		</div>
-	</div>
-</footer> -->
+		</footer>
 	</div>
 	<div id="popup" aria-hidden="true" class="popup">
 		<div class="popup__wrapper">
@@ -964,7 +1240,7 @@
 			</div>
 		</div>
 	</div>
-	<script src="js/app.min.js?_v=20220823224310"></script>
+	<script src="js/app.min.js?_v=20220827024933"></script>
 </body>
 
 </html>
