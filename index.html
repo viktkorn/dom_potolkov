@@ -8,8 +8,8 @@
 	<!-- <style>body{opacity: 0;}</style> -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,900;1,400;1,500;1,600;1,700;1,900&display=swap&_v=20220827024933" rel="stylesheet">
-	<link rel="stylesheet" href="css/style.min.css?_v=20220827024933">
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,900;1,400;1,500;1,600;1,700;1,900&display=swap&_v=20220827141841" rel="stylesheet">
+	<link rel="stylesheet" href="css/style.min.css?_v=20220827141841">
 	<link rel="shortcut icon" href="favicon.ico">
 	<!-- <meta name="robots" content="noindex, nofollow"> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,7 +21,7 @@
 			<div class="header__container-big">
 				<div class="header__logo">
 					<a href="#" class="header__logo-link"><img src="img/logo-dnp.png" alt="ДНП | ДОМ НАТЯЖНЫХ ПОТОЛКОВ"></a>
-					<h2 class="header__logo-title">Встановлюємо натяжні стелі в Харкові та Дніпрі з 2011 року</h2>
+					<h2 class="header__logo-title">Встановлюємо натяжні стелі в Харкові та Дніпрі з&nbsp;2011 року</h2>
 				</div>
 				<div class="header__link">
 					<a data-goto-header data-goto="#reviews" href="#"><img class="header__link-img" src="img/ico-video.png" alt="play"></a>
@@ -72,7 +72,7 @@
 								<h3>Отримайте повну <b>консультацію</b> та точну <b>вартість</b> натяжних стель від <b>головного технолога за&nbsp;40&nbsp;хвилин</b> не виходячи з дому</h3>
 							</div>
 							<form data-ajax method="POST" class="ceiling__form" action="sendmail.php">
-								<input data-validate data-required="phone" name="form[]" type="tel" class="ceiling__input" placeholder="Введіть номер телефону">
+								<input data-validate data-required="phone" name="form[]" type="tel" class="ceiling__input form-phone" placeholder="Введіть номер телефону">
 								<button type="submit" class="button-main ceiling__button">Отримати консультацію</button>
 							</form>
 							<div class="ceiling__benefits">
@@ -153,7 +153,7 @@
 										</div>
 										<div class="square__range">
 											<input type="text" readonly id="length-value" class="square__range-text" value="2"><b>м</b>
-											<input type="range" id="length-range" class="square__range-input" min="0" max="10" value="2" step="1" />
+											<input type="range" id="length-range" class="square__range-input" min="1" max="10" value="2" step="1" />
 										</div>
 									</div>
 									<div class="square__line">
@@ -162,7 +162,7 @@
 										</div>
 										<div class="square__range">
 											<input type="text" readonly id="width-value" class="square__range-text" value="4"><b>м</b>
-											<input type="range" id="width-range" class="square__range-input" min="0" max="10" value="4" step="1" />
+											<input type="range" id="width-range" class="square__range-input" min="1" max="10" value="4" step="1" />
 										</div>
 									</div>
 								</div>
@@ -248,7 +248,7 @@
 								Вкажіть номер телефону, щоб отримати допомогу в виборі матеріалів
 							</p>
 							<form data-ajax method="POST" class="calculator__form" action="sendmail.php">
-								<input data-validate data-required="phone" name="form[]" type="tel" class="calculator__form-phone" placeholder="Введіть номер телефону">
+								<input data-validate data-required="phone" name="form[]" type="tel" class="calculator__form-phone form-phone" placeholder="Введіть номер телефону">
 								<button type="submit" class="button-main calculator__form-button">Підібрати матеріали</button>
 							</form>
 						</div>
@@ -352,7 +352,7 @@
 					</p>
 					<form data-ajax method="POST" class="callback__form" action="sendmail.php">
 						<input data-validate data-required="date" name="form[]" data-datepicker type="text" class="callback__form-date" placeholder="дд.мм.рррр">
-						<input data-validate data-required="phone" name="form[]" type="tel" class="callback__form-phone" placeholder="Введіть номер телефону">
+						<input data-validate data-required="phone" name="form[]" type="tel" class="callback__form-phone form-phone" placeholder="Введіть номер телефону">
 						<button type="submit" class="button-main callback__form-button">Запросити технолога</button>
 					</form>
 				</div>
@@ -827,7 +827,7 @@
 						</p>
 						<form data-ajax method="POST" class="popup-callback__form" action="sendmail.php">
 							<input type="text" class="popup-callback__form-name" placeholder="Як до Вас звертатися?">
-							<input data-validate data-required="phone" name="form[]" type="tel" class="popup-callback__form-phone" placeholder="За яким номером Ви на зв’язку? ">
+							<input data-validate data-required="phone" name="form[]" type="tel" class="popup-callback__form-phone form-phone" placeholder="За яким номером Ви на зв’язку? ">
 							<button type="submit" class="button-main popup-callback__form-button">Отримати консультацію</button>
 						</form>
 					</div>
@@ -1131,7 +1131,7 @@
 								<b>Залиште номер,</b> позвонимо Вам напротязі 15 хвилин в робочий час Пн&#8209;Вс, 9:00-21:00
 							</p>
 							<form data-ajax method="POST" class="contact__form" action="sendmail.php">
-								<input data-validate data-required="phone" name="form[]" type="tel" class="contact__input" placeholder="Введіть номер телефону">
+								<input data-validate data-required="phone" name="form[]" type="tel" class="contact__input form-phone" placeholder="Введіть номер телефону">
 								<button type="submit" class="button-main contact__button">Отримати консультацію</button>
 							</form>
 						</div>
@@ -1240,7 +1240,7 @@
 			</div>
 		</div>
 	</div>
-	<script src="js/app.min.js?_v=20220827024933"></script>
+	<script src="js/app.min.js?_v=20220827141841"></script>
 </body>
 
 </html>

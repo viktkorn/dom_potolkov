@@ -1344,6 +1344,10 @@ body::after {
   color: #FFD319 !important;
 }
 
+._navigator-active:hover {
+  text-decoration: none;
+}
+
 .icon-menu {
   display: none;
 }
@@ -3529,6 +3533,28 @@ button.swiper-pagination-bullet {
     -webkit-transform: rotate(45deg);
         -ms-transform: rotate(45deg);
             transform: rotate(45deg);
+  }
+}
+
+@media (max-width: 390px) {
+  .header__logo-link {
+    padding: 0;
+  }
+
+  .header__logo {
+    font-size: 9px;
+    line-height: 11px;
+    margin-right: 10px;
+  }
+
+  .header__logo-title {
+    padding-left: 5px;
+    max-width: 125px;
+  }
+
+  .header__logo-title::before {
+    width: 0;
+    height: 0;
   }
 }
 

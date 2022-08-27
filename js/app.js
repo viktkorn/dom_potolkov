@@ -1055,61 +1055,6 @@
         popupItem.forEach(((item, index) => {
             item.addEventListener("click", (() => createPopup(index)));
         }));
-        class MousePRLX {
-            constructor(props, data = null) {
-                let defaultConfig = {
-                    init: true,
-                    logging: true
-                };
-                this.config = Object.assign(defaultConfig, props);
-                if (this.config.init) {
-                    const paralaxMouse = document.querySelectorAll("[data-prlx-mouse]");
-                    if (paralaxMouse.length) {
-                        this.paralaxMouseInit(paralaxMouse);
-                        this.setLogging(`Проснулся, слежу за объектами: (${paralaxMouse.length})`);
-                    } else this.setLogging("Нет ни одного объекта. Сплю...zzZZZzZZz...");
-                }
-            }
-            paralaxMouseInit(paralaxMouse) {
-                paralaxMouse.forEach((el => {
-                    const paralaxMouseWrapper = el.closest("[data-prlx-mouse-wrapper]");
-                    const paramСoefficientX = el.dataset.prlxCx ? +el.dataset.prlxCx : 100;
-                    const paramСoefficientY = el.dataset.prlxCy ? +el.dataset.prlxCy : 100;
-                    const directionX = el.hasAttribute("data-prlx-dxr") ? -1 : 1;
-                    const directionY = el.hasAttribute("data-prlx-dyr") ? -1 : 1;
-                    const paramAnimation = el.dataset.prlxA ? +el.dataset.prlxA : 50;
-                    let positionX = 0, positionY = 0;
-                    let coordXprocent = 0, coordYprocent = 0;
-                    setMouseParallaxStyle();
-                    if (paralaxMouseWrapper) mouseMoveParalax(paralaxMouseWrapper); else mouseMoveParalax();
-                    function setMouseParallaxStyle() {
-                        const distX = coordXprocent - positionX;
-                        const distY = coordYprocent - positionY;
-                        positionX += distX * paramAnimation / 1e3;
-                        positionY += distY * paramAnimation / 1e3;
-                        el.style.cssText = `transform: translate3D(${directionX * positionX / (paramСoefficientX / 10)}%,${directionY * positionY / (paramСoefficientY / 10)}%,0);`;
-                        requestAnimationFrame(setMouseParallaxStyle);
-                    }
-                    function mouseMoveParalax(wrapper = window) {
-                        wrapper.addEventListener("mousemove", (function(e) {
-                            const offsetTop = el.getBoundingClientRect().top + window.scrollY;
-                            if (offsetTop >= window.scrollY || offsetTop + el.offsetHeight >= window.scrollY) {
-                                const parallaxWidth = window.innerWidth;
-                                const parallaxHeight = window.innerHeight;
-                                const coordX = e.clientX - parallaxWidth / 2;
-                                const coordY = e.clientY - parallaxHeight / 2;
-                                coordXprocent = coordX / parallaxWidth * 100;
-                                coordYprocent = coordY / parallaxHeight * 100;
-                            }
-                        }));
-                    }
-                }));
-            }
-            setLogging(message) {
-                this.config.logging ? FLS(`[PRLX Mouse]: ${message}`) : null;
-            }
-        }
-        flsModules.mousePrlx = new MousePRLX({});
         let gotoBlock = (targetBlock, noHeader = false, speed = 500, offsetTop = 0) => {
             const targetBlockElement = document.querySelector(targetBlock);
             if (targetBlockElement) {
@@ -1351,10 +1296,10 @@
             onSelect: function(input, instance, date) {}
         });
         flsModules.datepicker = picker;
-        const phoneInput = document.querySelectorAll(".callback__form-phone")[0];
-        let prevPhone = "+38  ";
-        console.log(phoneInput);
-        [].forEach.call(document.querySelectorAll(".callback__form-phone"), (function(input) {
+        const phoneInputs = document.querySelectorAll(".form-phone");
+        let prevPhone = [ "+38  ", "+38  ", "+38  ", "+38  ", "+38  " ];
+        console.log(phoneInputs);
+        [].forEach.call(document.querySelectorAll(".form-phone"), (function(input) {
             let keyCode;
             function mask(event) {
                 event.keyCode && (keyCode = event.keyCode);
@@ -1380,47 +1325,16 @@
             input.addEventListener("blur", mask, false);
             input.addEventListener("keydown", mask, false);
         }));
-        phoneInput.addEventListener("focus", (e => {
-            e.target.value = prevPhone;
+        phoneInputs.forEach(((input, index) => {
+            input.addEventListener("focus", (e => {
+                e.target.value = prevPhone[index];
+            }));
         }));
-        phoneInput.addEventListener("blur", (e => {
-            prevPhone = e.target.value;
-            if (e.target.value.length <= 5) e.target.value = "";
-        }));
-        const phoneInputPopup = document.querySelectorAll(".popup-callback__form-phone")[0];
-        console.log(phoneInputPopup);
-        [].forEach.call(document.querySelectorAll(".popup-callback__form-phone"), (function(input) {
-            let keyCode;
-            function mask(event) {
-                event.keyCode && (keyCode = event.keyCode);
-                let pos = this.selectionStart;
-                if (pos < 3) event.preventDefault();
-                let matrix = "+38 (___) ___-__-__", i = 0, def = matrix.replace(/\D/g, ""), val = this.value.replace(/\D/g, ""), newValue = matrix.replace(/[_\d]/g, (function(a) {
-                    return i < val.length ? val.charAt(i++) || def.charAt(i) : a;
-                }));
-                i = newValue.indexOf("_");
-                if (-1 != i) {
-                    i < 5 && (i = 3);
-                    newValue = newValue.slice(0, i);
-                }
-                let reg = matrix.substr(0, this.value.length).replace(/_+/g, (function(a) {
-                    return "\\d{1," + a.length + "}";
-                })).replace(/[+()]/g, "\\$&");
-                reg = new RegExp("^" + reg + "$");
-                if (!reg.test(this.value) || this.value.length < 5 || keyCode > 47 && keyCode < 58) this.value = newValue;
-                if ("blur" == event.type && this.value.length < 5) this.value = "";
-            }
-            input.addEventListener("input", mask, false);
-            input.addEventListener("focus", mask, false);
-            input.addEventListener("blur", mask, false);
-            input.addEventListener("keydown", mask, false);
-        }));
-        phoneInputPopup.addEventListener("focus", (e => {
-            e.target.value = prevPhone;
-        }));
-        phoneInputPopup.addEventListener("blur", (e => {
-            prevPhone = e.target.value;
-            if (e.target.value.length <= 5) e.target.value = "";
+        phoneInputs.forEach(((input, index) => {
+            input.addEventListener("blur", (e => {
+                prevPhone[index] = e.target.value;
+                if (e.target.value.length <= 5) e.target.value = "";
+            }));
         }));
         function isObject(obj) {
             return null !== obj && "object" === typeof obj && "constructor" in obj && obj.constructor === Object;
@@ -5166,76 +5080,6 @@
                 }));
             }
         }), 0);
-        class parallax_Parallax {
-            constructor(elements) {
-                if (elements.length) this.elements = Array.from(elements).map((el => new parallax_Parallax.Each(el, this.options)));
-            }
-            destroyEvents() {
-                this.elements.forEach((el => {
-                    el.destroyEvents();
-                }));
-            }
-            setEvents() {
-                this.elements.forEach((el => {
-                    el.setEvents();
-                }));
-            }
-        }
-        parallax_Parallax.Each = class {
-            constructor(parent) {
-                this.parent = parent;
-                this.elements = this.parent.querySelectorAll("[data-prlx]");
-                this.animation = this.animationFrame.bind(this);
-                this.offset = 0;
-                this.value = 0;
-                this.smooth = parent.dataset.smooth ? Number(parent.dataset.smooth) : 15;
-                this.setEvents();
-            }
-            setEvents() {
-                this.animationID = window.requestAnimationFrame(this.animation);
-            }
-            destroyEvents() {
-                window.cancelAnimationFrame(this.animationID);
-            }
-            animationFrame() {
-                const topToWindow = this.parent.getBoundingClientRect().top;
-                const heightParent = this.parent.offsetHeight;
-                const heightWindow = window.innerHeight;
-                const positionParent = {
-                    top: topToWindow - heightWindow,
-                    bottom: topToWindow + heightParent
-                };
-                const centerPoint = this.parent.dataset.center ? this.parent.dataset.center : "center";
-                if (positionParent.top < 30 && positionParent.bottom > -30) switch (centerPoint) {
-                  case "top":
-                    this.offset = -1 * topToWindow;
-                    break;
-
-                  case "center":
-                    this.offset = heightWindow / 2 - (topToWindow + heightParent / 2);
-                    break;
-
-                  case "bottom":
-                    this.offset = heightWindow - (topToWindow + heightParent);
-                    break;
-                }
-                this.value += (this.offset - this.value) / this.smooth;
-                this.animationID = window.requestAnimationFrame(this.animation);
-                this.elements.forEach((el => {
-                    const parameters = {
-                        axis: el.dataset.axis ? el.dataset.axis : "v",
-                        direction: el.dataset.direction ? el.dataset.direction + "1" : "-1",
-                        coefficient: el.dataset.coefficient ? Number(el.dataset.coefficient) : 5,
-                        additionalProperties: el.dataset.properties ? el.dataset.properties : ""
-                    };
-                    this.parameters(el, parameters);
-                }));
-            }
-            parameters(el, parameters) {
-                if ("v" == parameters.axis) el.style.transform = `translate3D(0, ${(parameters.direction * (this.value / parameters.coefficient)).toFixed(2)}px,0) ${parameters.additionalProperties}`; else if ("h" == parameters.axis) el.style.transform = `translate3D(${(parameters.direction * (this.value / parameters.coefficient)).toFixed(2)}px,0,0) ${parameters.additionalProperties}`;
-            }
-        };
-        if (document.querySelectorAll("[data-prlx-parent]")) flsModules.parallax = new parallax_Parallax(document.querySelectorAll("[data-prlx-parent]"));
         function DynamicAdapt(type) {
             this.type = type;
         }
@@ -5356,17 +5200,20 @@
                 comfortPrice = 0;
                 premiumPrice = 0;
             } else if (parseInt(lengthValue.value * parseInt(widthValue.value)) < 16) {
-                ekonomPrice = basePrice * parseInt(lengthValue.value) * parseInt(widthValue.value) + 90 * (2 * (parseInt(lengthValue.value) + parseInt(widthValue.value))) + 200;
-                comfortPrice = basePrice * parseInt(lengthValue.value) * parseInt(widthValue.value) + 170 * (2 * (parseInt(lengthValue.value) + parseInt(widthValue.value))) + 200;
+                ekonomPrice = basePrice * parseInt(lengthValue.value) * parseInt(widthValue.value) + 110 * (2 * (parseInt(lengthValue.value) + parseInt(widthValue.value))) + 200;
+                comfortPrice = basePrice * parseInt(lengthValue.value) * parseInt(widthValue.value) + 200 * (2 * (parseInt(lengthValue.value) + parseInt(widthValue.value))) + 200;
                 premiumPrice = basePrice * parseInt(lengthValue.value) * parseInt(widthValue.value) + 375 * (2 * (parseInt(lengthValue.value) + parseInt(widthValue.value))) + 300;
             } else {
-                ekonomPrice = (basePrice + 50) * parseInt(lengthValue.value) * parseInt(widthValue.value) + 90 * (2 * (parseInt(lengthValue.value) + parseInt(widthValue.value))) + 200;
-                comfortPrice = (basePrice + 50) * parseInt(lengthValue.value) * parseInt(widthValue.value) + 170 * (2 * (parseInt(lengthValue.value) + parseInt(widthValue.value))) + 200;
+                ekonomPrice = (basePrice + 50) * parseInt(lengthValue.value) * parseInt(widthValue.value) + 110 * (2 * (parseInt(lengthValue.value) + parseInt(widthValue.value))) + 200;
+                comfortPrice = (basePrice + 50) * parseInt(lengthValue.value) * parseInt(widthValue.value) + 200 * (2 * (parseInt(lengthValue.value) + parseInt(widthValue.value))) + 200;
                 premiumPrice = (basePrice + 50) * parseInt(lengthValue.value) * parseInt(widthValue.value) + 375 * (2 * (parseInt(lengthValue.value) + parseInt(widthValue.value))) + 300;
             }
             ekonomPriceElement.innerText = parseInt(ekonomPrice);
             comfortPriceElement.innerText = parseInt(comfortPrice);
             premiumPriceElement.innerText = parseInt(premiumPrice);
+            if (ekonomPrice < 3900) ekonomPriceElement.innerText = 3900;
+            if (comfortPrice < 3900) comfortPriceElement.innerText = 3900;
+            if (premiumPrice < 3900) premiumPriceElement.innerText = 3900;
         }
         calculate();
         for (const input of inputs) input.addEventListener("input", (function() {
