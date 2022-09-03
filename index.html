@@ -8,8 +8,8 @@
 	<!-- <style>body{opacity: 0;}</style> -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,900;1,400;1,500;1,600;1,700;1,900&display=swap&_v=20220827141841" rel="stylesheet">
-	<link rel="stylesheet" href="css/style.min.css?_v=20220827141841">
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,900;1,400;1,500;1,600;1,700;1,900&display=swap&_v=20220903172049" rel="stylesheet">
+	<link rel="stylesheet" href="css/style.min.css?_v=20220903172049">
 	<link rel="shortcut icon" href="favicon.ico">
 	<!-- <meta name="robots" content="noindex, nofollow"> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -39,12 +39,13 @@
 						<p class="header__contact-text">Відповість менеджер Віталій</p>
 					</div>
 				</div>
-				<div class="header__actions">
-					<button type="button" class="menu__icon icon-menu"><span></span></button>
-				</div>
 			</div>
 			<div class="header__menu menu">
 				<nav class="menu__body">
+					<input id="menu__toggle" type="checkbox" />
+					<label class="menu__btn" for="menu__toggle">
+						<span></span>
+					</label>
 					<ul class="menu__list">
 						<li class="menu__item"><a href="#" data-goto-header data-goto=".ceiling__title" class="menu__link">Головна</a></li>
 						<li class="menu__item"><a href="#" data-goto-header data-goto=".calculator__container-title" class="menu__link">Розрахунок вартості</a></li>
@@ -65,10 +66,10 @@
 				<div class="ceiling__container-big">
 					<div class="ceiling__container">
 						<div class="ceiling__content">
-							<h1 data-watch="navigator" class="ceiling__title title title_s64">
+							<h1 data-watch="navigator" class="ceiling__title">
 								Натяжні стелі в&nbsp;Дніпрі
 							</h1>
-							<div class="ceiling__text text">
+							<div class="ceiling__text">
 								<h3>Отримайте повну <b>консультацію</b> та точну <b>вартість</b> натяжних стель від <b>головного технолога за&nbsp;40&nbsp;хвилин</b> не виходячи з дому</h3>
 							</div>
 							<form data-ajax method="POST" class="ceiling__form" action="sendmail.php">
@@ -143,53 +144,98 @@
 					<div class="calculator">
 						<div class="calculator__container">
 							<h2 data-watch="navigator" class="calculator__container-title">
-								Розрахунок приблизної ціни натяжної стелі з монтажем
+								Розрахунок приблизної ціни натяжної&nbsp;стелі&nbsp;з&nbsp;монтажем
 							</h2>
 							<div class="calculator__inner">
 								<div class="square">
 									<div class="square__line">
-										<div class="square__line-text">
-											Довжина кімнати:
+										<div class="square__inner">
+											<div class="square__line-text">
+												Довжина кімнати:
+											</div>
+											<input type="text" readonly id="length-value" class="square__range-text" value="2"><b>м</b>
 										</div>
 										<div class="square__range">
-											<input type="text" readonly id="length-value" class="square__range-text" value="2"><b>м</b>
 											<input type="range" id="length-range" class="square__range-input" min="1" max="10" value="2" step="1" />
 										</div>
 									</div>
 									<div class="square__line">
-										<div class="square__line-text">
-											Ширина кімнати:
+										<div class="square__inner">
+											<div class="square__line-text">
+												Ширина кімнати:
+											</div>
+											<input type="text" readonly id="width-value" class="square__range-text" value="4"><b>м</b>
 										</div>
 										<div class="square__range">
-											<input type="text" readonly id="width-value" class="square__range-text" value="4"><b>м</b>
 											<input type="range" id="width-range" class="square__range-input" min="1" max="10" value="4" step="1" />
 										</div>
 									</div>
 								</div>
 								<div class="result">
 									<div class="result__line">
-										<p class="result__line-title">
-											Ekonom:
-										</p>
-										<p class="result__line-price">
-											~ <span id="ekonom-price">3029</span> грн
-										</p>
+										<div class="result__line-inner">
+											<p class="result__line-title">
+												Ekonom:
+											</p>
+											<p class="result__line-price">
+												~ <span id="ekonom-price">3029</span> грн
+											</p>
+										</div>
+										<div class="result__description-column">
+											<p class="calculator__description-text">
+												Для технічних приміщень
+											</p>
+											<ul class="calculator__description-list">
+												<li class="calculator__description-list__item">Пластиковий профіль</li>
+												<li class="calculator__description-list__item">Полотно MSD Classic</li>
+												<li class="calculator__description-list__item">Без декоративної вставки</li>
+												<li class="calculator__description-list__item">Люстри/світильники</li>
+												<li class="calculator__description-list__item">Накладний карниз</li>
+											</ul>
+										</div>
 									</div>
 									<div class="result__line">
-										<p class="result__line-title">
-											Comfort:
-										</p>
-										<p class="result__line-price">
-											~ <span id="comfort-price">4949</span> грн
-										</p>
+										<div class="result__line-inner">
+											<p class="result__line-title">
+												Comfort:
+											</p>
+											<p class="result__line-price">
+												~ <span id="comfort-price">4949</span> грн
+											</p>
+										</div>
+										<div class="result__description-column">
+											<p class="calculator__description-text">
+												Для житлових приміщень (стандартна стеля)
+											</p>
+											<ul class="calculator__description-list">
+												<li class="calculator__description-list__item">Алюмінієвий профіль</li>
+												<li class="calculator__description-list__item">Полотно MSD Premium</li>
+												<li class="calculator__description-list__item">Декоративна вставка</li>
+												<li class="calculator__description-list__item">Люстри/світильники</li>
+												<li class="calculator__description-list__item">Прихований карниз</li>
+											</ul>
+										</div>
 									</div>
 									<div class="result__line">
-										<p class="result__line-title">
-											Premium:
-										</p>
-										<p class="result__line-price">
-											~ <span id="premium-price">7909</span> грн
-										</p>
+										<div class="result__line-inner">
+											<p class="result__line-title">
+												Premium:
+											</p>
+											<p class="result__line-price">
+												~ <span id="premium-price">7909</span> грн
+											</p>
+										</div>
+										<div class="result__description-column">
+											<p class="calculator__description-text">
+												Для житлових приміщень (дизайнерські рішення)
+											</p>
+											<ul class="calculator__description-list">
+												<li class="calculator__description-list__item">Тіньовий профіль</li>
+												<li class="calculator__description-list__item">Полотно MSD Premium/Teqtum/ Lumfer/Descor/Pongs</li>
+												<li class="calculator__description-list__item">Світлові лінії/паруюча стеля/ магнітні трекові світильники</li>
+												<li class="calculator__description-list__item">Прихований електро/-карниз</li>
+											</ul>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -239,13 +285,13 @@
 									</ul>
 								</div>
 							</div>
-							<h3 class="calculator__container-title">
-								З’явилися питання шодо вибору матеріалів?
+							<h3 class="calculator__container-title calculator__form-title">
+								З’явилися питання шодо вибору&nbsp;матеріалів?
 							</h3>
-							<p class="calculator__container-text">
-								Наші менеджери підберуть Вам оптимальний варіант <br>
-								натяжної стелі враховуючи Ваш бюджет. <br>
-								Вкажіть номер телефону, щоб отримати допомогу в виборі матеріалів
+							<p class="calculator__container-text calculator__form-text">
+								Наші менеджери підберуть Вам оптимальний варіант <br class="hm">
+								натяжної стелі враховуючи Ваш&nbsp;бюджет. <br>
+								Вкажіть номер телефону, щоб отримати допомогу в виборі&nbsp;матеріалів
 							</p>
 							<form data-ajax method="POST" class="calculator__form" action="sendmail.php">
 								<input data-validate data-required="phone" name="form[]" type="tel" class="calculator__form-phone form-phone" placeholder="Введіть номер телефону">
@@ -258,10 +304,10 @@
 			<section id="reviews" class="reviews page__reviews">
 				<div class="rewiews__container-big">
 					<h3 data-watch="navigator" class="reviews__title">
-						Відео-відгуки про нашу компанію
+						Відео-відгуки про&nbsp;нашу&nbsp;компанію
 					</h3>
 					<p class="reviews__text">
-						Можна довго розказувати які ми професіонали, але замість цього подивіться, що думають про нас наші клієнти:
+						Можна довго розказувати які ми професіонали, але замість цього подивіться, що думають про нас наші&nbsp;клієнти:
 					</p>
 					<ul class="reviews__list">
 						<li class="reviews__item">
@@ -290,10 +336,10 @@
 			<section data-watch="navigator" id="recommendations" class="recommendations page__recommendations">
 				<div class="rewiews__container-big">
 					<h2 class="recommendations__title">
-						Рекомендації по вибору натяжної стелі
+						Рекомендації по вибору натяжної&nbsp;стелі
 					</h2>
 					<p class="recommendations__text">
-						Прийміть рекомендації щодо вибору натяжних стель від головного технолога
+						Прийміть рекомендації щодо вибору натяжних стель від головного&nbsp;технолога
 					</p>
 					<div class="recommendations__inner">
 						<div class="recommendations__info">
@@ -303,7 +349,7 @@
 										Вибираєте стелю за цінам?
 									</h5>
 									<p class="recommendations__info-item__text">
-										«Вибирайте правильно – не вірте розмитим цінам за м2 в інтернеті. Порівнюйте вже точну, докладну, зафіксовану вартість після консультації та заміру Вашого житла»
+										«Вибирайте правильно – <b>не вірте розмитим цінам за м2 в інтернеті</b>. Порівнюйте вже точну, докладну, зафіксовану вартість після консультації та заміру Вашого житла»
 									</p>
 								</li>
 								<li class="recommendations__info-item">
@@ -311,7 +357,7 @@
 										Натяжна стеля - це конструкція, яка&nbsp;висітиме над Вашою головою більше 20 років
 									</h5>
 									<p class="recommendations__info-item__text">
-										«Більше 20 років – за умови використання якісних, надійних матеріалів. Ми привеземо та покажемо, з яких матеріалів ми робитимемо Вам стелю»
+										«Більше 20 років – за умови використання <b>якісних, надійних матеріалів</b>. Ми привеземо та покажемо, з яких матеріалів ми робитимемо Вам стелю»
 									</p>
 								</li>
 								<li class="recommendations__info-item">
@@ -319,7 +365,7 @@
 										Допомога щодо освітлення
 									</h5>
 									<p class="recommendations__info-item__text">
-										«Якщо не знаєте скільки, а головне які світильники вибрати собі в кімнату - я&nbsp;із&nbsp;задоволенням підкажу і допоможу з&nbsp;вибором під час консультації.»
+										«Якщо не знаєте скільки, а головне які світильники вибрати собі в кімнату - я&nbsp;із&nbsp;задоволенням <b>підкажу і допоможу з&nbsp;вибором</b> під час консультації.»
 									</p>
 								</li>
 								<li class="recommendations__info-item">
@@ -327,7 +373,7 @@
 										Вибір полотна впливає на&nbsp;загальний інтер'єр кімнати
 									</h5>
 									<p class="recommendations__info-item__text">
-										«Я привезу каталог усіх полотен, які у нас є, щоб Ви наживо змогли вибрати фактуру та&nbsp;колір полотна»
+										«<b>Я привезу каталог усіх полотен</b>, які у нас є, щоб Ви наживо змогли вибрати фактуру та&nbsp;колір полотна»
 									</p>
 								</li>
 							</ul>
@@ -338,6 +384,7 @@
 								<b>Кирило Ляшов</b>
 								Головний технолог
 							</h4>
+							<span></span>
 						</div>
 					</div>
 				</div>
@@ -348,7 +395,7 @@
 						Отримайте детальну консультацію
 					</h2>
 					<p class="callback__text">
-						Щоб отримати <b>детальну консультацію,</b> точний, <b>детальний прорахунок</b> стелі по кожній позиції,&nbsp;отримати розгорнуту <b>допомогу по освітленню</b> укажіть зручну для Вас дату:
+						Щоб отримати <b>детальну консультацію,</b> точний, <b>детальний прорахунок</b> стелі по кожній позиції,&nbsp;отримати розгорнуту <b>допомогу по освітленню</b> укажіть зручну для Вас&nbsp;дату:
 					</p>
 					<form data-ajax method="POST" class="callback__form" action="sendmail.php">
 						<input data-validate data-required="date" name="form[]" data-datepicker type="text" class="callback__form-date" placeholder="дд.мм.рррр">
@@ -360,7 +407,7 @@
 			<section data-watch="navigator" class="tabs page__tabs">
 				<div class="tabs__container-big">
 					<h2 class="tabs__title">
-						7000+ реалізованих проектів за 11 років<br>
+						7000+ реалізованих проектів за 11 років<br class="hm">
 						– жоден не повторився!
 					</h2>
 					<p class="tabs__text">
@@ -374,325 +421,359 @@
 							<li class="tabs__item"><button class="tabs__btn" data-tabs-path="bathroom">Ванна</button></li>
 							<li class="tabs__item"><button class="tabs__btn" data-tabs-path="corridor">Коридор</button></li>
 						</ul>
-						<div class="tabs__content tabs__content--active swiper" data-tabs-target="bedroom">
-							<div class="tab swiper-wrapper">
-								<div class="tab__slider swiper-slide">
-									<div class="tab__slide">
-										<img src="img/tabs/bedroom-01.jpg" alt="Image description" class="tab__slide-img">
-									</div>
-									<div class="tab__content">
-										<h5 class="tab__content-title">
-											Матеріали та параметри, які впливають на&nbsp;загальну вартість:
-										</h5>
-										<p class="tab__content-text">
-											Площа - 17,56м²<br>
-											Периметр - 18,47 м.п.<br>
-											Тіньове примикання<br>
-											Паруюча стеля<br>
-											Полотно MSD Premium<br>
-											Трекова магнітна система<br>
-											Підвісні світильники
-										</p>
-										<p class="tab__content-price">Ціна 18372 ГРН</p>
+						<div class="tabs__content tabs__content--active" data-tabs-target="bedroom">
+							<div class="tab__wrapper">
+								<div class="tab__slider swiper">
+									<div class="tab-img__slider swiper-container">
+										<div class="swiper-wrapper">
+											<div class="tab-img__slide swiper-slide">
+												<img src="img/tabs/bedroom-01.jpg" alt="Image description" class="tab__slide-img">
+											</div>
+											<div class="tab-img__slide swiper-slide">
+												<img src="img/tabs/bedroom-02.jpg" alt="Image description" class="tab__slide-img">
+											</div>
+											<div class="tab-img__slide swiper-slide">
+												<img src="img/tabs/bedroom-03.jpg" alt="Image description" class="tab__slide-img">
+											</div>
+										</div>
+										<div class="swiper-pagination"></div>
+										<button type="button" class="swiper-button swiper-button-prev"></button>
+										<button type="button" class="swiper-button swiper-button-next"></button>
 									</div>
 								</div>
-								<div class="tab__slider swiper-slide">
-									<div class="tab__slide">
-										<img src="img/tabs/bedroom-02.jpg" alt="Image description" class="tab__slide-img">
-									</div>
-									<div class="tab__content">
-										<h5 class="tab__content-title">
-											Матеріали та параметри, які впливають на&nbsp;загальну вартість:
-										</h5>
-										<p class="tab__content-text">
-											Площа - 10,14 м²<br>
-											Периметр - 12,8 м.п.<br>
-											Тіньове примикання<br>
-											Паруюча стеля<br>
-											Полотно MSD Premium<br>
-											Люстри
-										</p>
-										<p class="tab__content-price">Ціна 6243 ГРН</p>
-									</div>
-								</div>
-								<div class="tab__slider swiper-slide">
-									<div class="tab__slide">
-										<img src="img/tabs/bedroom-03.jpg" alt="Image description" class="tab__slide-img">
-									</div>
-									<div class="tab__content">
-										<h5 class="tab__content-title">
-											Матеріали та параметри, які впливають на&nbsp;загальну вартість:
-										</h5>
-										<p class="tab__content-text">
-											Площа - 13,54 м²<br>
-											Периметр - 14,76 м.п.<br>
-											Тіньове примикання<br>
-											Полотно MSD Premium<br>
-											Прихований карниз<br>
-											Люстра<br>
-											Підвісні світильники
-										</p>
-										<p class="tab__content-price">Ціна 10941 ГРН</p>
+								<div class="swiper">
+									<div class="tab-text__slider swiper-container">
+										<div class="swiper-wrapper">
+											<div class="swiper-slide tab-text__slide">
+												<h5 class="tab__content-title">
+													Матеріали та параметри, які впливають на&nbsp;загальну вартість:
+												</h5>
+												<p class="tab__content-text">
+													Площа - 17,56м²<br>
+													Периметр - 18,47 м.п.<br>
+													Тіньове примикання<br>
+													Паруюча стеля<br>
+													Полотно MSD Premium<br>
+													Трекова магнітна система<br>
+													Підвісні світильники
+												</p>
+												<p class="tab__content-price">Ціна 18372 ГРН</p>
+											</div>
+											<div class="swiper-slide tab-text__slide">
+												<h5 class="tab__content-title">
+													Матеріали та параметри, які впливають на&nbsp;загальну вартість:
+												</h5>
+												<p class="tab__content-text">
+													Площа - 10,14 м²<br>
+													Периметр - 12,8 м.п.<br>
+													Тіньове примикання<br>
+													Паруюча стеля<br>
+													Полотно MSD Premium<br>
+													Люстри
+												</p>
+												<p class="tab__content-price">Ціна 6243 ГРН</p>
+											</div>
+											<div class="swiper-slide tab-text__slide">
+												<h5 class="tab__content-title">
+													Матеріали та параметри, які впливають на&nbsp;загальну вартість:
+												</h5>
+												<p class="tab__content-text">
+													Площа - 13,54 м²<br>
+													Периметр - 14,76 м.п.<br>
+													Тіньове примикання<br>
+													Полотно MSD Premium<br>
+													Прихований карниз<br>
+													Люстра<br>
+													Підвісні світильники
+												</p>
+												<p class="tab__content-price">Ціна 10941 ГРН</p>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
-							<div class="swiper-pagination"></div>
-							<button type="button" class="swiper-button swiper-button-prev"></button>
-							<button type="button" class="swiper-button swiper-button-next"></button>
 						</div>
-						<div class="tabs__content swiper" data-tabs-target="kitchen">
-							<div class="tab swiper-wrapper">
-								<div class="tab__slider swiper-slide">
-									<div class="tab__slide">
-										<img src="img/tabs/kitchen-01.jpg" alt="Image description" class="tab__slide-img">
-									</div>
-									<div class="tab__content">
-										<h5 class="tab__content-title">
-											Матеріали та параметри, які впливають на&nbsp;загальну вартість:
-										</h5>
-										<p class="tab__content-text">
-											Площа - 10,8 м²<br>
-											Примикання зі вставкою<br>
-											Периметр - 12,43 м.п.<br>
-											Полотно MSD Premium<br>
-											Люстри<br>
-											Підвісні світильники
-										</p>
-										<p class="tab__content-price">Ціна 3439 ГРН</p>
-									</div>
-								</div>
-								<div class="tab__slider swiper-slide">
-									<div class="tab__slide">
-										<img src="img/tabs/kitchen-02.jpg" alt="Image description" class="tab__slide-img">
-									</div>
-									<div class="tab__content">
-										<h5 class="tab__content-title">
-											Матеріали та параметри, які впливають на&nbsp;загальну вартість:
-										</h5>
-										<p class="tab__content-text">
-											Площа - 12,36 м²<br>
-											Тіньове примикання<br>
-											Периметр - 14,17 м.п.<br>
-											Люстра<br>
-											Полотно MSD Premium<br>
-											Точкові світильники
-										</p>
-										<p class="tab__content-price">Ціна 8106 ГРН</p>
+						<div class="tabs__content" data-tabs-target="kitchen">
+							<div class="tab__wrapper">
+								<div class="tab__slider swiper">
+									<div class="tab-img__slider swiper-container">
+										<div class="swiper-wrapper">
+											<div class="tab-img__slide swiper-slide">
+												<img src="img/tabs/kitchen-01.jpg" alt="Image description" class="tab__slide-img">
+											</div>
+											<div class="tab-img__slide swiper-slide">
+												<img src="img/tabs/kitchen-02.jpg" alt="Image description" class="tab__slide-img">
+											</div>
+											<div class="tab-img__slide swiper-slide">
+												<img src="img/tabs/kitchen-03.jpg" alt="Image description" class="tab__slide-img">
+											</div>
+										</div>
+										<div class="swiper-pagination"></div>
+										<button type="button" class="swiper-button swiper-button-prev"></button>
+										<button type="button" class="swiper-button swiper-button-next"></button>
 									</div>
 								</div>
-								<div class="tab__slider swiper-slide">
-									<div class="tab__slide">
-										<img src="img/tabs/kitchen-03.jpg" alt="Image description" class="tab__slide-img">
-									</div>
-									<div class="tab__content">
-										<h5 class="tab__content-title">
-											Матеріали та параметри, які впливають на&nbsp;загальну вартість:
-										</h5>
-										<p class="tab__content-text">
-											Площа - 13,43 м²<br>
-											Периметр - 15,22 м.п.<br>
-											Тіньове примикання<br>
-											Полотно MSD Premium<br>
-											Світові лінії<br>
-											Прихований карниз
-										</p>
-										<p class="tab__content-price">Ціна 17543 ГРН</p>
+								<div class="swiper">
+									<div class="tab-text__slider swiper-container">
+										<div class="swiper-wrapper">
+											<div class="swiper-slide tab-text__slide">
+												<h5 class="tab__content-title">
+													Матеріали та параметри, які впливають на&nbsp;загальну вартість:
+												</h5>
+												<p class="tab__content-text">
+													Площа - 10,8 м²<br>
+													Примикання зі вставкою<br>
+													Периметр - 12,43 м.п.<br>
+													Полотно MSD Premium<br>
+													Люстри<br>
+													Підвісні світильники
+												</p>
+												<p class="tab__content-price">Ціна 3439 ГРН</p>
+											</div>
+											<div class="swiper-slide tab-text__slide">
+												<h5 class="tab__content-title">
+													Матеріали та параметри, які впливають на&nbsp;загальну вартість:
+												</h5>
+												<p class="tab__content-text">
+													Площа - 12,36 м²<br>
+													Тіньове примикання<br>
+													Периметр - 14,17 м.п.<br>
+													Люстра<br>
+													Полотно MSD Premium<br>
+													Точкові світильники
+												</p>
+												<p class="tab__content-price">Ціна 8106 ГРН</p>
+											</div>
+											<div class="swiper-slide tab-text__slide">
+												<h5 class="tab__content-title">
+													Матеріали та параметри, які впливають на&nbsp;загальну вартість:
+												</h5>
+												<p class="tab__content-text">
+													Площа - 13,43 м²<br>
+													Периметр - 15,22 м.п.<br>
+													Тіньове примикання<br>
+													Полотно MSD Premium<br>
+													Світові лінії<br>
+													Прихований карниз
+												</p>
+												<p class="tab__content-price">Ціна 17543 ГРН</p>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
-							<button type="button" class="swiper-button swiper-button-prev"></button>
-							<button type="button" class="swiper-button swiper-button-next"></button>
 						</div>
-						<div class="tabs__content swiper" data-tabs-target="living_room">
-							<div class="tab swiper-wrapper">
-								<div class="tab__slider swiper-slide">
-									<div class="tab__slide">
-										<img src="img/tabs/living_room_01.jpg" alt="Image description" class="tab__slide-img">
-									</div>
-									<div class="tab__content">
-										<h5 class="tab__content-title">
-											Матеріали та параметри, які впливають на&nbsp;загальну вартість:
-										</h5>
-										<p class="tab__content-text">
-											Площа - 37,09 м²<br>
-											Периметр - 27,45 м.п.<br>
-											Тіньове примикання<br>
-											Полотно MSD Premium<br>
-											Накладне трекове освітлення<br>
-											Люстра<br>
-											Підвісні світильники
-										</p>
-										<p class="tab__content-price">Ціна 18340 ГРН</p>
+						<div class="tabs__content" data-tabs-target="living_room">
+							<div class="tab__wrapper">
+								<div class="tab__slider swiper">
+									<div class="tab-img__slider swiper-container">
+										<div class="swiper-wrapper">
+											<div class="tab-img__slide swiper-slide">
+												<img src="img/tabs/living_room_01.jpg" alt="Image description" class="tab__slide-img">
+											</div>
+											<div class="tab-img__slide swiper-slide">
+												<img src="img/tabs/living_room_02.jpg" alt="Image description" class="tab__slide-img">
+											</div>
+											<div class="tab-img__slide swiper-slide">
+												<img src="img/tabs/living_room_03.jpg" alt="Image description" class="tab__slide-img">
+											</div>
+										</div>
+										<div class="swiper-pagination"></div>
+										<button type="button" class="swiper-button swiper-button-prev"></button>
+										<button type="button" class="swiper-button swiper-button-next"></button>
 									</div>
 								</div>
-								<div class="tab__slider swiper-slide">
-									<div class="tab__slide">
-										<img src="img/tabs/living_room_02.jpg" alt="Image description" class="tab__slide-img">
-									</div>
-									<div class="tab__content">
-										<h5 class="tab__content-title">
-											Матеріали та параметри, які впливають на&nbsp;загальну вартість:
-										</h5>
-										<p class="tab__content-text">
-											Площа - 14,64 м²<br>
-											Периметр - 15,36 м.п.<br>
-											Паруюча стеля<br>
-											Полотно MSD Premium<br>
-											Лінійні світильники Slott<br>
-											Підвісні світильники
-										</p>
-										<p class="tab__content-price">Ціна 29160 ГРН</p>
-									</div>
-								</div>
-								<div class="tab__slider swiper-slide">
-									<div class="tab__slide">
-										<img src="img/tabs/living_room_03.jpg" alt="Image description" class="tab__slide-img">
-									</div>
-									<div class="tab__content">
-										<h5 class="tab__content-title">
-											Матеріали та параметри, які впливають на&nbsp;загальну вартість:
-										</h5>
-										<p class="tab__content-text">
-											Площа - 25,3 м²<br>
-											Периметр - 27,67 м.п.<br>
-											Тіньове примикання<br>
-											Паруюча стеля<br>
-											Полотно MSD Premium<br>
-											Накладне трекове освітлення<br>
-											Підвісні світильники
-										</p>
-										<p class="tab__content-price">Ціна 22404 ГРН</p>
+								<div class="swiper">
+									<div class="tab-text__slider swiper-container">
+										<div class="swiper-wrapper">
+											<div class="swiper-slide tab-text__slide">
+												<h5 class="tab__content-title">
+													Матеріали та параметри, які впливають на&nbsp;загальну вартість:
+												</h5>
+												<p class="tab__content-text">
+													Площа - 37,09 м²<br>
+													Периметр - 27,45 м.п.<br>
+													Тіньове примикання<br>
+													Полотно MSD Premium<br>
+													Накладне трекове освітлення<br>
+													Люстра<br>
+													Підвісні світильники
+												</p>
+												<p class="tab__content-price">Ціна 18340 ГРН</p>
+											</div>
+											<div class="swiper-slide tab-text__slide">
+												<h5 class="tab__content-title">
+													Матеріали та параметри, які впливають на&nbsp;загальну вартість:
+												</h5>
+												<p class="tab__content-text">
+													Площа - 14,64 м²<br>
+													Периметр - 15,36 м.п.<br>
+													Паруюча стеля<br>
+													Полотно MSD Premium<br>
+													Лінійні світильники Slott<br>
+													Підвісні світильники
+												</p>
+												<p class="tab__content-price">Ціна 29160 ГРН</p>
+											</div>
+											<div class="swiper-slide tab-text__slide">
+												<h5 class="tab__content-title">
+													Матеріали та параметри, які впливають на&nbsp;загальну вартість:
+												</h5>
+												<p class="tab__content-text">
+													Площа - 25,3 м²<br>
+													Периметр - 27,67 м.п.<br>
+													Тіньове примикання<br>
+													Паруюча стеля<br>
+													Полотно MSD Premium<br>
+													Накладне трекове освітлення<br>
+													Підвісні світильники
+												</p>
+												<p class="tab__content-price">Ціна 22404 ГРН</p>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
-							<button type="button" class="swiper-button swiper-button-prev"></button>
-							<button type="button" class="swiper-button swiper-button-next"></button>
 						</div>
-						<div class="tabs__content swiper" data-tabs-target="bathroom">
-							<div class="tab swiper-wrapper">
-								<div class="tab__slider swiper-slide">
-									<div class="tab__slide">
-										<img src="img/tabs/bathroom-01.jpg" alt="Image description" class="tab__slide-img">
-									</div>
-									<div class="tab__content">
-										<h5 class="tab__content-title">
-											Матеріали та параметри, які впливають на&nbsp;загальну вартість:
-										</h5>
-										<p class="tab__content-text">
-											Площа - 6,01 м²<br>
-											Периметр - 11.85 м.п.<br>
-											Тіньове примикання<br>
-											Паруюча стеля<br>
-											Примикання зі вставкою<br>
-											Полотно MSD Premium<br>
-											Точкові світильники
-										</p>
-										<p class="tab__content-price">Ціна 7713 ГРН</p>
+						<div class="tabs__content" data-tabs-target="bathroom">
+							<div class="tab__wrapper">
+								<div class="tab__slider swiper">
+									<div class="tab-img__slider swiper-container">
+										<div class="swiper-wrapper">
+											<div class="tab-img__slide swiper-slide">
+												<img src="img/tabs/bathroom-01.jpg" alt="Image description" class="tab__slide-img">
+											</div>
+											<div class="tab-img__slide swiper-slide">
+												<img src="img/tabs/bathroom-02.jpg" alt="Image description" class="tab__slide-img">
+											</div>
+											<div class="tab-img__slide swiper-slide">
+												<img src="img/tabs/bathroom-03.jpg" alt="Image description" class="tab__slide-img">
+											</div>
+										</div>
+										<div class="swiper-pagination"></div>
+										<button type="button" class="swiper-button swiper-button-prev"></button>
+										<button type="button" class="swiper-button swiper-button-next"></button>
 									</div>
 								</div>
-								<div class="tab__slider swiper-slide">
-									<div class="tab__slide">
-										<img src="img/tabs/bathroom-02.jpg" alt="Image description" class="tab__slide-img">
-									</div>
-									<div class="tab__content">
-										<h5 class="tab__content-title">
-											Матеріали та параметри, які впливають на&nbsp;загальну вартість:
-										</h5>
-										<p class="tab__content-text">
-											Площа - 0,53 м²<br>
-											Периметр - 3,25 м.п.<br>
-											Тіньове примикання<br>
-											Полотно Translucent<br>
-											Світлова стеля
-										</p>
-										<p class="tab__content-price">Ціна 6276 ГРН</p>
-									</div>
-								</div>
-								<div class="tab__slider swiper-slide">
-									<div class="tab__slide">
-										<img src="img/tabs/bathroom-03.jpg" alt="Image description" class="tab__slide-img">
-									</div>
-									<div class="tab__content">
-										<h5 class="tab__content-title">
-											Матеріали та параметри, які впливають на&nbsp;загальну вартість:
-										</h5>
-										<p class="tab__content-text">
-											Площа - 4,7 м²<br>
-											Периметр - 6,58 м.п.<br>
-											Тіньове примикання<br>
-											Паруюча стеля<br>
-											Полотно MSD Premium<br>
-											Світлові лінії
-										</p>
-										<p class="tab__content-price">Ціна 14680 ГРН</p>
+								<div class="swiper">
+									<div class="tab-text__slider swiper-container">
+										<div class="swiper-wrapper">
+											<div class="swiper-slide tab-text__slide">
+												<h5 class="tab__content-title">
+													Матеріали та параметри, які впливають на&nbsp;загальну вартість:
+												</h5>
+												<p class="tab__content-text">
+													Площа - 6,01 м²<br>
+													Периметр - 11.85 м.п.<br>
+													Тіньове примикання<br>
+													Паруюча стеля<br>
+													Примикання зі вставкою<br>
+													Полотно MSD Premium<br>
+													Точкові світильники
+												</p>
+												<p class="tab__content-price">Ціна 7713 ГРН</p>
+											</div>
+											<div class="swiper-slide tab-text__slide">
+												<h5 class="tab__content-title">
+													Матеріали та параметри, які впливають на&nbsp;загальну вартість:
+												</h5>
+												<p class="tab__content-text">
+													Площа - 0,53 м²<br>
+													Периметр - 3,25 м.п.<br>
+													Тіньове примикання<br>
+													Полотно Translucent<br>
+													Світлова стеля
+												</p>
+												<p class="tab__content-price">Ціна 6276 ГРН</p>
+											</div>
+											<div class="swiper-slide tab-text__slide">
+												<h5 class="tab__content-title">
+													Матеріали та параметри, які впливають на&nbsp;загальну вартість:
+												</h5>
+												<p class="tab__content-text">
+													Площа - 4,7 м²<br>
+													Периметр - 6,58 м.п.<br>
+													Тіньове примикання<br>
+													Паруюча стеля<br>
+													Полотно MSD Premium<br>
+													Світлові лінії
+												</p>
+												<p class="tab__content-price">Ціна 14680 ГРН</p>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
-							<button type="button" class="swiper-button swiper-button-prev"></button>
-							<button type="button" class="swiper-button swiper-button-next"></button>
 						</div>
-						<div class="tabs__content swiper" data-tabs-target="corridor">
-							<div class="tab swiper-wrapper">
-								<div class="tab__slider swiper-slide">
-									<div class="tab__slide">
-										<img src="img/tabs/corridor-01.jpg" alt="Image description" class="tab__slide-img">
-									</div>
-									<div class="tab__content">
-										<h5 class="tab__content-title">
-											Матеріали та параметри, які впливають на&nbsp;загальну вартість:
-										</h5>
-										<p class="tab__content-text">
-											Площа - 6,09 м²<br>
-											Периметр - 12,62 м.п.<br>
-											Примикання зі вставкою<br>
-											Паруюча стеля<br>
-											Полотно MSD Premium<br>
-											Підвісні світильники
-										</p>
-										<p class="tab__content-price">Ціна 3400 ГРН</p>
-									</div>
-								</div>
-								<div class="tab__slider swiper-slide">
-									<div class="tab__slide">
-										<img src="img/tabs/corridor-02.jpg" alt="Image description" class="tab__slide-img">
-									</div>
-									<div class="tab__content">
-										<h5 class="tab__content-title">
-											Матеріали та параметри, які впливають на&nbsp;загальну вартість:
-										</h5>
-										<p class="tab__content-text">
-											Площа - 3,06 м²<br>
-											Периметр - 7,75 м.п.<br>
-											Тіньове примикання<br>
-											Паруюча стеля<br>
-											Полотно MSD Premium<br>
-											Споти
-										</p>
-										<p class="tab__content-price">Ціна 3400 ГРН</p>
+						<div class="tabs__content" data-tabs-target="corridor">
+							<div class="tab__wrapper">
+								<div class="tab__slider swiper">
+									<div class="tab-img__slider swiper-container">
+										<div class="swiper-wrapper">
+											<div class="tab-img__slide swiper-slide">
+												<img src="img/tabs/corridor-01.jpg" alt="Image description" class="tab__slide-img">
+											</div>
+											<div class="tab-img__slide swiper-slide">
+												<img src="img/tabs/corridor-02.jpg" alt="Image description" class="tab__slide-img">
+											</div>
+											<div class="tab-img__slide swiper-slide">
+												<img src="img/tabs/corridor-03.jpg" alt="Image description" class="tab__slide-img">
+											</div>
+										</div>
+										<div class="swiper-pagination"></div>
+										<button type="button" class="swiper-button swiper-button-prev"></button>
+										<button type="button" class="swiper-button swiper-button-next"></button>
 									</div>
 								</div>
-								<div class="tab__slider swiper-slide">
-									<div class="tab__slide">
-										<img src="img/tabs/corridor-03.jpg" alt="Image description" class="tab__slide-img">
-									</div>
-									<div class="tab__content">
-										<h5 class="tab__content-title">
-											Матеріали та параметри, які впливають на&nbsp;загальну вартість:
-										</h5>
-										<p class="tab__content-text">
-											Площа - 18,51 м²<br>
-											Периметр - 23,8 м.п.<br>
-											Тіньове примикання<br>
-											Паруюча стеля<br>
-											Полотно MSD Premium<br>
-											Світлові лінії
-										</p>
-										<p class="tab__content-price">Ціна 18955 ГРН</p>
+								<div class="swiper">
+									<div class="tab-text__slider swiper-container">
+										<div class="swiper-wrapper">
+											<div class="swiper-slide tab-text__slide">
+												<h5 class="tab__content-title">
+													Матеріали та параметри, які впливають на&nbsp;загальну вартість:
+												</h5>
+												<p class="tab__content-text">
+													Площа - 6,09 м²<br>
+													Периметр - 12,62 м.п.<br>
+													Примикання зі вставкою<br>
+													Паруюча стеля<br>
+													Полотно MSD Premium<br>
+													Підвісні світильники
+												</p>
+												<p class="tab__content-price">Ціна 3400 ГРН</p>
+											</div>
+											<div class="swiper-slide tab-text__slide">
+												<h5 class="tab__content-title">
+													Матеріали та параметри, які впливають на&nbsp;загальну вартість:
+												</h5>
+												<p class="tab__content-text">
+													Площа - 3,06 м²<br>
+													Периметр - 7,75 м.п.<br>
+													Тіньове примикання<br>
+													Паруюча стеля<br>
+													Полотно MSD Premium<br>
+													Споти
+												</p>
+												<p class="tab__content-price">Ціна 3400 ГРН</p>
+											</div>
+											<div class="swiper-slide tab-text__slide">
+												<h5 class="tab__content-title">
+													Матеріали та параметри, які впливають на&nbsp;загальну вартість:
+												</h5>
+												<p class="tab__content-text">
+													Площа - 18,51 м²<br>
+													Периметр - 23,8 м.п.<br>
+													Тіньове примикання<br>
+													Паруюча стеля<br>
+													Полотно MSD Premium<br>
+													Світлові лінії
+												</p>
+												<p class="tab__content-price">Ціна 18955 ГРН</p>
+											</div>
+										</div>
 									</div>
 								</div>
 							</div>
-							<button type="button" class="swiper-button swiper-button-prev"></button>
-							<button type="button" class="swiper-button swiper-button-next"></button>
 						</div>
 					</div>
 				</div>
@@ -700,11 +781,11 @@
 			<section data-watch="navigator" class="popup__section page__popup">
 				<div class="popup__container-big">
 					<h2 class="popup__title">
-						Натяжна стеля це не тільки полотно!
+						Натяжна стеля це не тільки&nbsp;полотно!
 					</h2>
 					<p class="popup__text">
-						Дізнайтесь детальніше про види натяжної стелі та про додаткові елементи декора, <br>
-						котрі також впливають на вартість
+						Дізнайтесь детальніше про види натяжної стелі та про додаткові елементи декора, <br class="hm">
+						котрі також впливають на&nbsp;вартість
 					</p>
 					<div class="popup__inner">
 						<div class="popup__item">
@@ -820,10 +901,10 @@
 					</div>
 					<div class="popup-callback">
 						<h2 class="popup-callback__title">
-							Не розумієте яку стелю бажаєте?
+							Не розумієте яку стелю&nbsp;бажаєте?
 						</h2>
 						<p class="popup-callback__text">
-							Наш менеджер <b>розповість про кожен вид</b> натяжної стелі, підкаже <b>технічні характеристики</b>, назве <b>приблизну вартість</b>. Вкажіть як можна до Вас звертатися, та за яким номером Ви на зв’язку:
+							Наш менеджер <b>розповість про кожен вид</b> натяжної стелі, підкаже <b>технічні характеристики</b>, назве <b>приблизну вартість</b>. Вкажіть як можна до Вас звертатися, та за яким номером Ви&nbsp;на&nbsp;зв’язку:
 						</p>
 						<form data-ajax method="POST" class="popup-callback__form" action="sendmail.php">
 							<input type="text" class="popup-callback__form-name" placeholder="Як до Вас звертатися?">
@@ -838,7 +919,7 @@
 					<div class="assurance__box">
 						<h2 class="assurance__title">
 							Завдяки ретельному вибору постачальників матеріалів – впевнені в якості наших стель, тому:
-							<b>Фіксуємо гарантії в офіціальному договорі</b>
+							<b>Фіксуємо гарантії в офіціальному&nbsp;договорі</b>
 						</h2>
 						<div class="assurance__inner">
 							<ul class="assurance__inner-list">
@@ -865,7 +946,7 @@
 					</div>
 					<div data-watch="navigator" class="assurance__rating">
 						<h3 class="assurance__rating-title">
-							<img src="img/assurance/rate-5.svg" alt="5.0"> середня оцінка по відгукам <span>G</span><span class="red__color">o</span><span class="yellow__color">o</span><span>g</span><span class="green__color">l</span><span class="red__color">e</span>
+							<img src="img/assurance/rate-5.svg" alt="5.0"> середня оцінка по відгукам&nbsp;<span>G</span><span class="red__color">o</span><span class="yellow__color">o</span><span>g</span><span class="green__color">l</span><span class="red__color">e</span>
 						</h3>
 						<p class="assurance__rating-text">
 							Один раз замовивши стелю у нас — рекомендують рідним і близьким
@@ -879,10 +960,10 @@
 			<section data-watch="navigator" class="compare page__compare">
 				<div class="compare__container-big">
 					<h2 class="compare__title">
-						Порівняння натяжної стелі з іншими видами оздоблення стелі
+						Порівняння натяжної стелі з іншими видами оздоблення&nbsp;стелі
 					</h2>
 					<p class="compare__text">
-						В таблиці приведений аналіз найпопулярніших видів оздоблення стелі
+						В таблиці приведений аналіз найпопулярніших видів оздоблення&nbsp;стелі
 					</p>
 					<div class="compare__inner">
 						<table class="compare__table">
@@ -919,21 +1000,21 @@
 											<h6>Швидкість монтажу (12м²)</h6>
 										</div>
 									</th>
-									<td class="compare__table-separator"></td>
+									<td class="compare__table-separator"> </td>
 									<td>
 										<div class="compare__table-text">
 											<img src="img/compare/ico-date.svg" alt="Дата">
 											<p>3-4 дня</p>
 										</div>
 									</td>
-									<td class="compare__table-separator"></td>
+									<td class="compare__table-separator"> </td>
 									<td>
 										<div class="compare__table-text">
 											<img src="img/compare/ico-date.svg" alt="Дата">
 											<p>5-7 днів</p>
 										</div>
 									</td>
-									<td class="compare__table-separator"></td>
+									<td class="compare__table-separator"> </td>
 									<td>
 										<div class="compare__table-text">
 											<img src="img/compare/ico-time.svg" alt="Час">
@@ -947,21 +1028,21 @@
 											<h6>Тріщини</h6>
 										</div>
 									</th>
-									<td class="compare__table-separator"></td>
+									<td class="compare__table-separator"> </td>
 									<td>
 										<div class="compare__table-text">
 											<img src="img/compare/ico-big-crack.png" alt="Тріщини">
 											<p>Неминуча поява тріщин</p>
 										</div>
 									</td>
-									<td class="compare__table-separator"></td>
+									<td class="compare__table-separator"> </td>
 									<td>
 										<div class="compare__table-text">
 											<img src="img/compare/ico-small-crack.png" alt="Тріщини">
 											<p>Можлива поява тріщин</p>
 										</div>
 									</td>
-									<td class="compare__table-separator"></td>
+									<td class="compare__table-separator"> </td>
 									<td>
 										<div class="compare__table-text">
 											<img src="img/compare/ico-success.png" alt="Успіх">
@@ -975,27 +1056,27 @@
 											<h6>Захист від затоплення</h6>
 										</div>
 									</th>
-									<td class="compare__table-separator"></td>
+									<td class="compare__table-separator"> </td>
 									<td>
 										<div class="compare__table-text">
 											<img src="img/compare/ico-error.png" alt="Помилка">
 											<p>Не захищає кімнату</p>
 										</div>
 									</td>
-									<td class="compare__table-separator"></td>
+									<td class="compare__table-separator"> </td>
 									<td>
 										<div class="compare__table-text">
 											<img src="img/compare/ico-error.png" alt="Помилка">
 											<p>Не захищає кімнату</p>
 										</div>
 									</td>
-									<td class="compare__table-separator"></td>
+									<td class="compare__table-separator"> </td>
 									<td>
 										<div class="compare__table-text">
 											<img src="img/compare/ico-success.png" alt="Успіх">
 											<p>
 												Витримує<br>
-												до 100 л на 1 м²
+												до 100 л на 1&nbsp;м²
 											</p>
 										</div>
 									</td>
@@ -1006,21 +1087,21 @@
 											<h6>Опуск стелі</h6>
 										</div>
 									</th>
-									<td class="compare__table-separator"></td>
+									<td class="compare__table-separator"> </td>
 									<td>
 										<div class="compare__table-text">
 											<img src="img/compare/ico-error.png" alt="Помилка">
 											<p>Відсутній</p>
 										</div>
 									</td>
-									<td class="compare__table-separator"></td>
+									<td class="compare__table-separator"> </td>
 									<td>
 										<div class="compare__table-text">
 											<img src="img/compare/ico-size.png" alt="Розмір">
 											<p>4 - 5 см</p>
 										</div>
 									</td>
-									<td class="compare__table-separator"></td>
+									<td class="compare__table-separator"> </td>
 									<td>
 										<div class="compare__table-text">
 											<img src="img/compare/ico-size.png" alt="Розмір">
@@ -1034,21 +1115,21 @@
 											<h6>Експлуатаційні властивості</h6>
 										</div>
 									</th>
-									<td class="compare__table-separator"></td>
+									<td class="compare__table-separator"> </td>
 									<td>
 										<div class="compare__table-text">
 											<img src="img/compare/ico-big-crack.png" alt="Тріщини">
 											<p>Можливе відлущування штукатурки</p>
 										</div>
 									</td>
-									<td class="compare__table-separator"></td>
+									<td class="compare__table-separator"> </td>
 									<td>
 										<div class="compare__table-text">
 											<img src="img/compare/ico-big-crack.png" alt="Тріщини">
 											<p>Можливе відлущування штукатурки</p>
 										</div>
 									</td>
-									<td class="compare__table-separator"></td>
+									<td class="compare__table-separator"> </td>
 									<td>
 										<div class="compare__table-text">
 											<img src="img/compare/ico-success.png" alt="Успіх">
@@ -1062,21 +1143,21 @@
 											<h6>Противопожежні властивості</h6>
 										</div>
 									</th>
-									<td class="compare__table-separator"></td>
+									<td class="compare__table-separator"> </td>
 									<td>
 										<div class="compare__table-text">
 											<img src="img/compare/ico-success.png" alt="Успіх">
 											<p>Не підтримує горіння</p>
 										</div>
 									</td>
-									<td class="compare__table-separator"></td>
+									<td class="compare__table-separator"> </td>
 									<td>
 										<div class="compare__table-text">
 											<img src="img/compare/ico-success.png" alt="Успіх">
 											<p>Не підтримує горіння</p>
 										</div>
 									</td>
-									<td class="compare__table-separator"></td>
+									<td class="compare__table-separator"> </td>
 									<td>
 										<div class="compare__table-text">
 											<img src="img/compare/ico-success.png" alt="Успіх">
@@ -1090,21 +1171,21 @@
 											<h6>Можливість вологого прибирання</h6>
 										</div>
 									</th>
-									<td class="compare__table-separator"></td>
+									<td class="compare__table-separator"> </td>
 									<td>
 										<div class="compare__table-text">
 											<img src="img/compare/ico-error.png" alt="Помилка">
 											<p>Відсутня</p>
 										</div>
 									</td>
-									<td class="compare__table-separator"></td>
+									<td class="compare__table-separator"> </td>
 									<td>
 										<div class="compare__table-text">
 											<img src="img/compare/ico-error.png" alt="Помилка">
 											<p>Відсутня</p>
 										</div>
 									</td>
-									<td class="compare__table-separator"></td>
+									<td class="compare__table-separator"> </td>
 									<td>
 										<div class="compare__table-text">
 											<img src="img/compare/ico-success.png" alt="Успіх">
@@ -1120,15 +1201,17 @@
 			<section class="contact page__contact">
 				<div class="contact__container-big">
 					<h3 class="contact__title">
-						Ми готові відповісти Вам на будь-які питання
+						Ми готові відповісти Вам на&nbsp;будь&#8209;які питання
 					</h3>
 					<p class="contact__text">
-						Зв'яжіться з нами зручним для Вас способом
+						Зв'яжіться з нами зручним для Вас&nbsp;способом
 					</p>
 					<div class="contact__inner">
 						<div class="contact__callback">
 							<p class="contact__callback-text">
-								<b>Залиште номер,</b> позвонимо Вам напротязі 15 хвилин в робочий час Пн&#8209;Вс, 9:00-21:00
+								<b>Залиште номер,</b> позвонимо Вам <br class="hm">
+								напротязі 15 хвилин в робочий час <br class="hm">
+								Пн&#8209;Вс, 9:00-21:00
 							</p>
 							<form data-ajax method="POST" class="contact__form" action="sendmail.php">
 								<input data-validate data-required="phone" name="form[]" type="tel" class="contact__input form-phone" placeholder="Введіть номер телефону">
@@ -1199,7 +1282,7 @@
 					<div class="popup-info__inner">
 						<p class="popup-info__text">
 						</p>
-						<div class="popup-contact">
+						<div class="popup-contact__dekstop popup-contact">
 							<h6 class="popup-contact_title">Додаткова інформація:</h6>
 							<div class="popup-contact__inner">
 								<div class="popup-phone__box">
@@ -1237,10 +1320,27 @@
 						</div>
 					</div>
 				</div>
+				<div class="popup-contact__mobile popup-contact">
+					<h6 class="popup-contact_title">Додаткова інформація:</h6>
+					<div class="popup-contact__inner">
+						<div class="popup-phone__box">
+							<a class="popup-phone__link" href="tel:0668006878">(066)-800-68-78</a>
+							<a class="popup-phone__link" href="tel:0988006878">(098)-800-68-78</a>
+						</div>
+						<div class="popup-social__box">
+							<a class="popup-social__link" href="https://link">
+								<img src="img/popup/ico-viber.png" alt="viber">
+							</a>
+							<a class="popup-social__link" href="https://link">
+								<img src="img/popup/ico-telegram.png" alt="telegram">
+							</a>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
-	<script src="js/app.min.js?_v=20220827141841"></script>
+	<script src="js/app.min.js?_v=20220903172049"></script>
 </body>
 
 </html>
