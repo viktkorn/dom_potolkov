@@ -4822,6 +4822,10 @@ button.swiper-pagination-bullet {
     padding: 0 5px;
   }
 
+  .popup-social__link img {
+    width: 30px;
+  }
+
   .assurance__inner-list {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
@@ -5309,10 +5313,6 @@ button.swiper-pagination-bullet {
   .popup-contact {
     font-size: 16px;
     line-height: 18px;
-  }
-
-  .popup-social__link img {
-    width: 30px;
   }
 
   .ceiling__image img {
