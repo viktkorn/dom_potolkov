@@ -4858,6 +4858,11 @@ button.swiper-pagination-bullet {
     max-width: 45vw;
   }
 
+  .assurance__section {
+    background-position: center top;
+    background-size: 250%;
+  }
+
   .assurance__inner-list {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
@@ -5200,6 +5205,10 @@ button.swiper-pagination-bullet {
   .popup-callback__title {
     font-size: 20px;
     line-height: 22px;
+  }
+
+  .assurance__section {
+    background-size: 330%;
   }
 
   .assurance__box::before {
