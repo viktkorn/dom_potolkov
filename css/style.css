@@ -4201,16 +4201,21 @@ button.swiper-pagination-bullet {
     padding-top: 0;
   }
 
+  .popup__inner {
+    -ms-flex-pack: distribute;
+        justify-content: space-around;
+  }
+
   .popup__item {
-    max-width: 46vw;
+    max-width: 44vw;
   }
 
   .popup__link {
-    max-width: 46vw;
+    max-width: 44vw;
   }
 
   .popup__img {
-    max-width: 46vw;
+    max-width: 44vw;
   }
 }
 
@@ -4752,7 +4757,7 @@ button.swiper-pagination-bullet {
     width: 120px;
     font-size: 14px;
     line-height: 15px;
-    padding: 5px;
+    padding: 5px !important;
     border-radius: 7px;
   }
 }
@@ -4947,20 +4952,6 @@ button.swiper-pagination-bullet {
 
   .contact__box-text .hm {
     display: none;
-  }
-}
-
-@media (max-width: 460px) {
-  .popup__item {
-    max-width: 45vw;
-  }
-
-  .popup__link {
-    max-width: 45vw;
-  }
-
-  .popup__img {
-    max-width: 45vw;
   }
 }
 
@@ -5369,18 +5360,6 @@ button.swiper-pagination-bullet {
 
   .result__description-column {
     width: 260px;
-  }
-
-  .popup__item {
-    max-width: 44vw;
-  }
-
-  .popup__link {
-    max-width: 44vw;
-  }
-
-  .popup__img {
-    max-width: 44vw;
   }
 }
 
