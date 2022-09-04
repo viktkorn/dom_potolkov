@@ -4714,6 +4714,26 @@ button.swiper-pagination-bullet {
 }
 
 @media (max-width: 560px) {
+  .popup__content {
+    border-radius: 10px;
+  }
+
+  .thumbs-slide img {
+    border-radius: 7px;
+  }
+
+  .gallery-top-slide {
+    border-radius: 7px;
+  }
+
+  .gallery-top-slide img {
+    border-radius: 7px;
+  }
+
+  .swiper-slide-thumb-active::before {
+    border-radius: 7px;
+  }
+
   .popup__item-title {
     font-size: 16px;
     line-height: 17px;
