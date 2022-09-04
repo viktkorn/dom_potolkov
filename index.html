@@ -8,8 +8,8 @@
 	<!-- <style>body{opacity: 0;}</style> -->
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,900;1,400;1,500;1,600;1,700;1,900&display=swap&_v=20220903172049" rel="stylesheet">
-	<link rel="stylesheet" href="css/style.min.css?_v=20220903172049">
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,900;1,400;1,500;1,600;1,700;1,900&display=swap&_v=20220904154023" rel="stylesheet">
+	<link rel="stylesheet" href="css/style.min.css?_v=20220904154023">
 	<link rel="shortcut icon" href="favicon.ico">
 	<!-- <meta name="robots" content="noindex, nofollow"> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -72,8 +72,8 @@
 							<div class="ceiling__text">
 								<h3>Отримайте повну <b>консультацію</b> та точну <b>вартість</b> натяжних стель від <b>головного технолога за&nbsp;40&nbsp;хвилин</b> не виходячи з дому</h3>
 							</div>
-							<form data-ajax method="POST" class="ceiling__form" action="sendmail.php">
-								<input data-validate data-required="phone" name="form[]" type="tel" class="ceiling__input form-phone" placeholder="Введіть номер телефону">
+							<form class="ceiling__form">
+								<input type="tel" class="ceiling__input form-phone" placeholder="Введіть номер телефону">
 								<button type="submit" class="button-main ceiling__button">Отримати консультацію</button>
 							</form>
 							<div class="ceiling__benefits">
@@ -144,7 +144,7 @@
 					<div class="calculator">
 						<div class="calculator__container">
 							<h2 data-watch="navigator" class="calculator__container-title">
-								Розрахунок приблизної ціни натяжної&nbsp;стелі&nbsp;з&nbsp;монтажем
+								Розрахунок приблизної ціни натяжної стелі з&nbsp;монтажем
 							</h2>
 							<div class="calculator__inner">
 								<div class="square">
@@ -293,8 +293,8 @@
 								натяжної стелі враховуючи Ваш&nbsp;бюджет. <br>
 								Вкажіть номер телефону, щоб отримати допомогу в виборі&nbsp;матеріалів
 							</p>
-							<form data-ajax method="POST" class="calculator__form" action="sendmail.php">
-								<input data-validate data-required="phone" name="form[]" type="tel" class="calculator__form-phone form-phone" placeholder="Введіть номер телефону">
+							<form class="calculator__form">
+								<input type="tel" class="calculator__form-phone form-phone" placeholder="Введіть номер телефону">
 								<button type="submit" class="button-main calculator__form-button">Підібрати матеріали</button>
 							</form>
 						</div>
@@ -397,9 +397,9 @@
 					<p class="callback__text">
 						Щоб отримати <b>детальну консультацію,</b> точний, <b>детальний прорахунок</b> стелі по кожній позиції,&nbsp;отримати розгорнуту <b>допомогу по освітленню</b> укажіть зручну для Вас&nbsp;дату:
 					</p>
-					<form data-ajax method="POST" class="callback__form" action="sendmail.php">
-						<input data-validate data-required="date" name="form[]" data-datepicker type="text" class="callback__form-date" placeholder="дд.мм.рррр">
-						<input data-validate data-required="phone" name="form[]" type="tel" class="callback__form-phone form-phone" placeholder="Введіть номер телефону">
+					<form class="callback__form">
+						<input data-datepicker type="text" class="callback__form-date" placeholder="дд.мм.рррр">
+						<input type="tel" class="callback__form-phone form-phone" placeholder="Введіть номер телефону">
 						<button type="submit" class="button-main callback__form-button">Запросити технолога</button>
 					</form>
 				</div>
@@ -833,7 +833,7 @@
 								Натяжна стеля з підсвіткою
 							</h4>
 							<p class="popup__item-text">
-								Спеціальний вид натяжної стелі, за допомогою якого на стіну падає рівно- мірне освітлення
+								Спеціальний вид натяжної стелі, за допомогою якого на стіну падає рівномірне освітлення
 							</p>
 						</div>
 						<div class="popup__item">
@@ -895,7 +895,7 @@
 								Ніші в натяжній стелі
 							</h4>
 							<p class="popup__item-text">
-								Спеіальний вид натяжної стелі, за допомогою якого на стіну падає рівно-мірне освітлення
+								Спеціальний вид натяжної стелі, за допомогою якого на стіну падає рівномірне освітлення
 							</p>
 						</div>
 					</div>
@@ -906,9 +906,9 @@
 						<p class="popup-callback__text">
 							Наш менеджер <b>розповість про кожен вид</b> натяжної стелі, підкаже <b>технічні характеристики</b>, назве <b>приблизну вартість</b>. Вкажіть як можна до Вас звертатися, та за яким номером Ви&nbsp;на&nbsp;зв’язку:
 						</p>
-						<form data-ajax method="POST" class="popup-callback__form" action="sendmail.php">
+						<form class="popup-callback__form">
 							<input type="text" class="popup-callback__form-name" placeholder="Як до Вас звертатися?">
-							<input data-validate data-required="phone" name="form[]" type="tel" class="popup-callback__form-phone form-phone" placeholder="За яким номером Ви на зв’язку? ">
+							<input type="tel" class="popup-callback__form-phone form-phone" placeholder="За яким номером Ви на зв’язку? ">
 							<button type="submit" class="button-main popup-callback__form-button">Отримати консультацію</button>
 						</form>
 					</div>
@@ -1209,12 +1209,12 @@
 					<div class="contact__inner">
 						<div class="contact__callback">
 							<p class="contact__callback-text">
-								<b>Залиште номер,</b> позвонимо Вам <br class="hm">
-								напротязі 15 хвилин в робочий час <br class="hm">
+								<b>Залиште номер,</b> ми зателефонуємо Вам <br class="hm">
+								протягом 15 хвилин в робочий час <br class="hm">
 								Пн&#8209;Вс, 9:00-21:00
 							</p>
-							<form data-ajax method="POST" class="contact__form" action="sendmail.php">
-								<input data-validate data-required="phone" name="form[]" type="tel" class="contact__input form-phone" placeholder="Введіть номер телефону">
+							<form class="contact__form">
+								<input type="tel" class="contact__input form-phone" placeholder="Введіть номер телефону">
 								<button type="submit" class="button-main contact__button">Отримати консультацію</button>
 							</form>
 						</div>
@@ -1340,7 +1340,7 @@
 			</div>
 		</div>
 	</div>
-	<script src="js/app.min.js?_v=20220903172049"></script>
+	<script src="js/app.min.js?_v=20220904154023"></script>
 </body>
 
 </html>
