@@ -2752,7 +2752,7 @@ body::after {
   bottom: 10px;
   left: 10px;
   width: 200px;
-  padding: 5vw;
+  padding: 10px;
   font-weight: 500;
   font-size: 20px;
   line-height: 22px;
@@ -4358,7 +4358,7 @@ button.swiper-pagination-bullet {
   }
 
   .assurance__inner {
-    margin: 0 auto 40px;
+    margin: 0 auto 100px;
   }
 
   .assurance__inner-item img {
@@ -4860,7 +4860,7 @@ button.swiper-pagination-bullet {
 
   .assurance__section {
     background-position: center top;
-    background-size: 250%;
+    background-size: 300%;
   }
 
   .assurance__inner-list {
@@ -5208,7 +5208,7 @@ button.swiper-pagination-bullet {
   }
 
   .assurance__section {
-    background-size: 330%;
+    background-size: 360%;
   }
 
   .assurance__box::before {
