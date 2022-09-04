@@ -4744,11 +4744,16 @@ button.swiper-pagination-bullet {
     line-height: 14px;
   }
 
+  .popup__img {
+    border-radius: 10px;
+  }
+
   .popup__btn {
     width: 120px;
     font-size: 14px;
     line-height: 15px;
     padding: 5px;
+    border-radius: 7px;
   }
 }
 
@@ -5182,10 +5187,6 @@ button.swiper-pagination-bullet {
   .popup__title {
     font-size: 20px;
     line-height: 22px;
-  }
-
-  .popup__img {
-    border-radius: 10px;
   }
 
   .popup__btn {
